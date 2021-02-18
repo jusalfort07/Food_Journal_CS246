@@ -10,6 +10,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         // First comment test
         // Second comment to practice merging conflicts
+        // Third comment from Michael for testing...can someone please confirm that they can see this.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
