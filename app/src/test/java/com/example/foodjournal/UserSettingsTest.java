@@ -15,19 +15,3 @@ public class UserSettingsTest {
         assertEquals("weekly", user1.frequency);
     }
 }
-
-class UserSettings {
-    String name;
-    String email;
-    Boolean sendReport;
-    String frequency;
-
-    public UserSettings(String name, String email, Boolean sendR, String freq) {
-        this.name = name;
-        this.email = email;
-        this.sendReport = sendR;
-        this.frequency = freq;
-    }
-}
-
-// Comment for Branch testing
