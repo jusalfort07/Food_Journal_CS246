@@ -29,3 +29,5 @@ class UserSettings {
         this.frequency = freq;
     }
 }
+
+// Comment for Branch testing
