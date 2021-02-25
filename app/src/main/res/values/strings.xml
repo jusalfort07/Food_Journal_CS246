@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Food Journal</string>
+    <string name="welcome">Welcome</string>
+    <string name="sub_title">to Food Journal</string>
+
+    <string name="btn_start">Start Entry</string>
+    <string name="btn_view">View Journal</string>
+    <string name="btn_settings">User Settings</string>
+    <string name="inst_1">Please click on any button to start using this application</string>
 </resources>
