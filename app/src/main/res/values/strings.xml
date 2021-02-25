@@ -3,11 +3,17 @@
     <string name="app_entry">Food Data Entry</string>
     <string name="app_view">Food List View</string>
     <string name="app_setting">App User Settings</string>
+
     <string name="welcome">Welcome</string>
     <string name="sub_title">to Food Journal</string>
 
     <string name="btn_start">Start Entry</string>
     <string name="btn_view">View Journal</string>
     <string name="btn_settings">User Settings</string>
+    <string name="btn_back">Back to Main</string>
+
     <string name="inst_1">Please click on any button to start using this application</string>
+    <string name="inst_2">You may enter food or water consumption here</string>
+    <string name="inst_3">You can view or edit existing entry here</string>
+    <string name="inst_4">Please enter user information and preferences here</string>
 </resources>

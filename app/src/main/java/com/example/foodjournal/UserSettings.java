@@ -2,8 +2,10 @@ package com.example.foodjournal;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 public class UserSettings extends AppCompatActivity {
 
@@ -21,6 +23,18 @@ public class UserSettings extends AppCompatActivity {
         // Set background
         appBackground4 = findViewById(R.id.appbg4);
         appBackground4.setBackgroundResource(R.drawable.bg_blue);
+
+        // Set return button
+        Button btnReturn4 = (Button) findViewById(R.id.btn_return4);
+        btnReturn4.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+
+            }
+        });
     }
 
 
