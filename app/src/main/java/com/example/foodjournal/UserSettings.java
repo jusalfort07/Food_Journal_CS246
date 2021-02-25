@@ -1,17 +1,34 @@
 package com.example.foodjournal;
 
-public class UserSettings {
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+
+public class UserSettings extends AppCompatActivity {
 
     String name;
     String email;
     Boolean sendReport;
     String frequency;
+    View appBackground4;
 
-    public UserSettings(String name, String email, Boolean sendR, String freq) {
-            this.name = name;
-            this.email = email;
-            this.sendReport = sendR;
-            this.frequency = freq;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_user_settings);
+
+        // Set background
+        appBackground4 = findViewById(R.id.appbg4);
+        appBackground4.setBackgroundResource(R.drawable.bg_blue);
+    }
+
+
+    public UserSettings() {
+        this.name = "";
+        this.email = "";
+        this.sendReport = true;
+        this.frequency = "weekly";
     }
 
     public void setName(String name) {
@@ -45,5 +62,4 @@ public class UserSettings {
     public String getFrequency() {
         return frequency;
     }
-
 }

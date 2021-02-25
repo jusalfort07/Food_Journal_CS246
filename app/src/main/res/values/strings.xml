@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Food Journal</string>
+    <string name="app_entry">Food Data Entry</string>
+    <string name="app_view">Food List View</string>
+    <string name="app_setting">App User Settings</string>
     <string name="welcome">Welcome</string>
     <string name="sub_title">to Food Journal</string>
 

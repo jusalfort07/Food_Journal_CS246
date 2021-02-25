@@ -2,6 +2,7 @@ package com.example.foodjournal;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,7 +10,7 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
 
     Button btnStart, btnView, btnSettings;
-    View appBackGround;
+    View appBackground;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,12 +21,34 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Set main background
-        appBackGround = findViewById(R.id.appbg);
-        appBackGround.setBackgroundResource(R.drawable.bg_blue);
+        appBackground = findViewById(R.id.appbg);
+        appBackground.setBackgroundResource(R.drawable.bg_blue);
 
         // Assigning buttons
         btnStart = findViewById(R.id.btn_start);
         btnView = findViewById(R.id.btn_view);
         btnSettings = findViewById(R.id.btn_settings);
+
+        btnStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, FoodEntry.class));
+            }
+        });
+
+        btnView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, FoodReport.class));
+            }
+        });
+
+        btnSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, UserSettings.class));
+            }
+        });
+
     }
 }
