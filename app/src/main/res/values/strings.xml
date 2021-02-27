@@ -16,4 +16,16 @@
     <string name="inst_2">You may enter food or water consumption here</string>
     <string name="inst_3">You can view or edit existing entry here</string>
     <string name="inst_4">Please enter user information and preferences here</string>
+
+    <!--Food Data Entry-->
+    <string name="type">Type:</string>
+    <string name="solid">Solid</string>
+    <string name="liquid">Liquid</string>
+    <string name="description">Description</string>
+    <string name="quantity">Quantity</string>
+    <string name="date">Date</string>
+    <string name="comments">Comments</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+
 </resources>
