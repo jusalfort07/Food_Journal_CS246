@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="dark_blue">#14145B</color>
     <color name="gray_inst">#96969D</color>
+    <color name="gray_hint">#CDCDD2</color>
 </resources>

@@ -15,15 +15,18 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/txt_EntryTypeLbl"
+        android:text="@string/type"
+        android:textSize="18sp"
+        android:textStyle="italic"
+        android:textColor="@color/white"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
-        android:text="@string/type"
-        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,133 +43,133 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
+        app:layout_constraintTop_toBottomOf="@+id/txt_EntryTypeLbl">
 
         <RadioButton
             android:id="@+id/idRadio1"
+            android:padding="5dp"
+            android:text="@string/solid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:padding="5dp"
-            android:text="@string/solid" />
+            android:textColor="@color/black" />
 
         <RadioButton
             android:id="@+id/idRadio2"
+            android:padding="5dp"
+            android:text="@string/liquid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:padding="5dp"
-            android:text="@string/liquid" />
-
+            android:textColor="@color/black" />
     </RadioGroup>
+
+    <EditText
+        android:id="@+id/txt_Description"
+        android:ems="10"
+        android:hint="@string/description"
+        android:textColorHint="@color/gray_hint"
+        android:inputType="text"
+        android:autofillHints=""
+
+        android:layout_width="282dp"
+        android:layout_height="63dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/idRadioGroup" />
+
+    <EditText
+        android:id="@+id/txt_Quantity"
+        android:ems="10"
+        android:hint="@string/quantity"
+        android:textColorHint="@color/gray_hint"
+        android:inputType="number"
+        android:autofillHints=""
+
+        android:layout_width="282dp"
+        android:layout_height="63dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_Description" />
+
+    <EditText
+        android:id="@+id/txt_EntryDate"
+        android:ems="10"
+        android:hint="@string/date"
+        android:textColorHint="@color/gray_hint"
+        android:inputType="none"
+        android:autofillHints=""
+
+        android:layout_width="282dp"
+        android:layout_height="63dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.526"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_Quantity" />
+
+    <EditText
+        android:id="@+id/txt_Comments"
+        android:ems="10"
+        android:hint="@string/comments"
+        android:textColorHint="@color/gray_hint"
+        android:inputType="textMultiLine"
+        android:autofillHints=""
+
+        android:layout_width="282dp"
+        android:layout_height="85dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.533"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_EntryDate" />
+
 
     <Button
         android:id="@+id/btn_return2"
-        android:layout_width="150dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
         android:background="@drawable/btn_ltblue"
         android:elevation="9dp"
-        android:text="@string/btn_back"
+        android:text="@string/cancel"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/txt_instruct2"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_Comments" />
+
+    <Button
+        android:id="@+id/btn_save"
+        android:background="@drawable/btn_ltblue"
+        android:elevation="9dp"
+        android:text="@string/save"
+        android:textColor="@color/white"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_Comments" />
 
     <TextView
         android:id="@+id/txt_instruct2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="25dp"
         android:text="@string/inst_2"
         android:textAlignment="center"
         android:textColor="@color/gray_inst"
         android:textSize="16sp"
         android:textStyle="italic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout2"
-        android:layout_width="282dp"
-        android:layout_height="63dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/idRadioGroup">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/description" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <EditText
-        android:id="@+id/editTextNumber"
-        android:layout_width="282dp"
-        android:layout_height="63dp"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="@string/quantity"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
-        android:autofillHints="" />
-
-    <EditText
-        android:id="@+id/editTextDate"
-        android:layout_width="282dp"
-        android:layout_height="63dp"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="@string/date"
-        android:inputType="date"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.526"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumber"
-        android:autofillHints="" />
-
-    <EditText
-        android:id="@+id/editTextTextPersonName2"
-        android:layout_width="282dp"
-        android:layout_height="85dp"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="@string/comments"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.533"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDate"
-        android:autofillHints="" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="80dp"
-        android:text="@string/save"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="28dp"
-        android:text="@string/cancel"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

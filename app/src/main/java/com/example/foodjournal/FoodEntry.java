@@ -2,14 +2,30 @@ package com.example.foodjournal;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.TimePicker;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+import static java.util.Calendar.DAY_OF_MONTH;
+import static java.util.Calendar.HOUR_OF_DAY;
+import static java.util.Calendar.MINUTE;
+import static java.util.Calendar.MONTH;
+import static java.util.Calendar.YEAR;
 
 public class FoodEntry extends AppCompatActivity {
 
     View appBackground2;
+    EditText date_time_entry;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,5 +47,50 @@ public class FoodEntry extends AppCompatActivity {
 
             }
         });
+
+        // Date and Time Picker codes...
+        date_time_entry = findViewById(R.id.txt_EntryDate);
+        date_time_entry.setInputType(InputType.TYPE_NULL);
+        date_time_entry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDateTimeDialog(date_time_entry);
+            }
+
+        });
     }
+
+    private void showDateTimeDialog(final EditText date_time_entry) {
+        final Calendar calendar = Calendar.getInstance();
+
+        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                calendar.set(Calendar.YEAR, year);
+                calendar.set(Calendar.MONTH, month);
+                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+                TimePickerDialog.OnTimeSetListener timeSetListener = new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                        calendar.set(Calendar.MINUTE, minute);
+
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM-dd-YYYY HH:MM");
+                        date_time_entry.setText(simpleDateFormat.format(calendar.getTime()));
+                    }
+                };
+                new TimePickerDialog(FoodEntry.this,timeSetListener,
+                        calendar.get(HOUR_OF_DAY),
+                        calendar.get(MINUTE),
+                        false).show();
+            }
+        };
+
+        new DatePickerDialog(this, dateSetListener,
+                calendar.get(YEAR),
+                calendar.get(MONTH),
+                calendar.get(DAY_OF_MONTH)).show();
+    }
+
 }
