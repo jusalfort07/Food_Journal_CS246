@@ -9,6 +9,7 @@ import android.widget.Button;
 
 public class UserSettings extends AppCompatActivity {
 
+    // Member variables
     String name;
     String email;
     Boolean sendReport;
@@ -32,12 +33,11 @@ public class UserSettings extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
-
             }
         });
     }
 
-
+    // Default constructor
     public UserSettings() {
         this.name = "";
         this.email = "";
@@ -45,35 +45,31 @@ public class UserSettings extends AppCompatActivity {
         this.frequency = "weekly";
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setSendReport(Boolean sendReport) {
-        this.sendReport = sendReport;
-    }
-
-    public void setFrequency(String frequency) {
-        this.frequency = frequency;
-    }
-
+    // Getters
     public String getName() {
         return name;
     }
-
     public String getEmail() {
         return email;
     }
-
     public Boolean getSendReport() {
         return sendReport;
     }
-
     public String getFrequency() {
         return frequency;
+    }
+
+    // Setters
+    public void setName(String name) {
+        this.name = name;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    public void setSendReport(Boolean sendReport) {
+        this.sendReport = sendReport;
+    }
+    public void setFrequency(String frequency) {
+        this.frequency = frequency;
     }
 }
