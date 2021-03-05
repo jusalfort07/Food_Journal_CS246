@@ -28,5 +28,12 @@
     <string name="cancel">Cancel</string>
     <string name="save">Save</string>
     <string name="view">View</string>
+    <string name="user_settings">User Settings</string>
+    <string name="monthly">monthly</string>
+    <string name="weekly">weekly</string>
+    <string name="frecuency">frecuency</string>
+    <string name="send_report_automatically">Send report automatically?</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
 
 </resources>
