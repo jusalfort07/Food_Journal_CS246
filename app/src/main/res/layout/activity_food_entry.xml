@@ -97,13 +97,12 @@
         app:layout_constraintTop_toBottomOf="@+id/txt_Description" />
 
     <EditText
-        android:id="@+id/txt_EntryDate"
+        android:id="@+id/fromDate"
         android:ems="10"
         android:hint="@string/date"
         android:textColorHint="@color/gray_hint"
         android:inputType="none"
         android:autofillHints=""
-
         android:layout_width="282dp"
         android:layout_height="63dp"
         android:layout_marginTop="20dp"
@@ -126,32 +125,32 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_EntryDate" />
+        app:layout_constraintTop_toBottomOf="@+id/fromDate" />
 
 
     <Button
         android:id="@+id/btn_return2"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/btn_ltblue"
         android:elevation="9dp"
         android:text="@string/cancel"
         android:textColor="@color/white"
-        android:layout_width="150dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="40dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_Comments" />
 
     <Button
         android:id="@+id/btn_save"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="24dp"
         android:background="@drawable/btn_ltblue"
         android:elevation="9dp"
         android:text="@string/save"
         android:textColor="@color/white"
-        android:layout_width="150dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_Comments" />
 

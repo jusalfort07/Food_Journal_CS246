@@ -27,5 +27,15 @@
     <string name="comments">Enter other information</string>
     <string name="cancel">Cancel</string>
     <string name="save">Save</string>
+    <string name="user_settings">User Settings</string>
+    <string name="weekly">Weekly</string>
+    <string name="monthly">Monthly</string>
+    <string name="frecuency">Frecuency</string>
+    <string name="send_report_automatically">Send report automatically?</string>
+    <string name="email">Email</string>
+    <string name="name">Name</string>
+    <string name="report">Report</string>
+    <string name="from">From</string>
+
 
 </resources>

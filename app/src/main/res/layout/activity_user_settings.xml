@@ -17,6 +17,129 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
+    <TextView
+        android:id="@+id/UserSettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="20dp"
+        android:text="@string/user_settings"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/appbg4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.039" />
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="282dp"
+        android:layout_height="63dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/name"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/UserSettings" />
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="282dp"
+        android:layout_height="61dp"
+        android:layout_marginTop="20dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_instruct4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.33" />
+
+    <CheckBox
+        android:id="@+id/sendReport"
+        android:layout_width="285dp"
+        android:layout_height="42dp"
+        android:text="@string/send_report_automatically"
+        android:textColor="@color/white"
+        android:textColorLink="#E91E63"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/appbg4"
+        app:layout_constraintEnd_toEndOf="@+id/appbg4"
+        app:layout_constraintHorizontal_bias="0.531"
+        app:layout_constraintStart_toStartOf="@+id/appbg4"
+        app:layout_constraintTop_toTopOf="@+id/appbg4"
+        app:layout_constraintVertical_bias="0.461" />
+
+    <TextView
+        android:id="@+id/frequency"
+        android:layout_width="133dp"
+        android:layout_height="38dp"
+        android:text="@string/frecuency"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.226"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.591" />
+
+    <RadioButton
+        android:id="@+id/weekly"
+        android:layout_width="81dp"
+        android:layout_height="30dp"
+        android:text="@string/weekly"
+        android:textColor="@color/white"
+        android:textColorLink="#2196F3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/appbg4"
+        app:layout_constraintHorizontal_bias="0.19"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.656" />
+
+
+    <RadioButton
+        android:id="@+id/monthly"
+        android:layout_width="84dp"
+        android:layout_height="32dp"
+        android:text="@string/monthly"
+        android:textColor="@color/white"
+        android:textColorLink="#2196F3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.192"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.725" />
+
+    <Button
+        android:id="@+id/save"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/btn_ltblue"
+        android:elevation="9dp"
+        android:text="@string/save"
+
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/txt_instruct4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.107"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.998" />
+
     <Button
         android:id="@+id/btn_return4"
         android:layout_width="150dp"

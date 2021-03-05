@@ -1,7 +1,5 @@
 package com.example.foodjournal;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
@@ -12,6 +10,8 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -49,7 +49,7 @@ public class FoodEntry extends AppCompatActivity {
         });
 
         // Date and Time Picker codes...
-        date_time_entry = findViewById(R.id.txt_EntryDate);
+        date_time_entry = findViewById(R.id.fromDate);
         date_time_entry.setInputType(InputType.TYPE_NULL);
         date_time_entry.setOnClickListener(new View.OnClickListener() {
             @Override
