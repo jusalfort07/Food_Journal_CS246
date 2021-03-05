@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FoodEntry">
+    tools:context=".FoodEntry"
+    android:id="@+id/form_FoodEntry">
 
     <View
         android:id="@+id/appbg2"
@@ -130,28 +131,41 @@
 
 
     <Button
-        android:id="@+id/btn_return2"
-        android:background="@drawable/btn_ltblue"
-        android:elevation="9dp"
-        android:text="@string/cancel"
-        android:textColor="@color/white"
-        android:layout_width="150dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="40dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_Comments" />
-
-    <Button
         android:id="@+id/btn_save"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/btn_ltblue"
         android:elevation="9dp"
         android:text="@string/save"
         android:textColor="@color/white"
-        android:layout_width="150dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_Comments" />
+
+    <Button
+        android:id="@+id/btn_view"
+        android:layout_width="100dp"
         android:layout_height="30dp"
         android:layout_marginTop="40dp"
-        android:layout_marginEnd="40dp"
+        android:background="@drawable/btn_ltblue"
+        android:elevation="9dp"
+        android:text="@string/view"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toStartOf="@+id/btn_return2"
+        app:layout_constraintStart_toEndOf="@+id/btn_save"
+        app:layout_constraintTop_toBottomOf="@+id/txt_Comments" />
+
+    <Button
+        android:id="@+id/btn_return2"
+        android:layout_width="120dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/btn_ltblue"
+        android:elevation="9dp"
+        android:text="@string/btn_back"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_Comments" />
 
