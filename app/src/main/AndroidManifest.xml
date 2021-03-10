@@ -16,7 +16,7 @@
             android:name=".FoodReport"
             android:label="@string/app_view" />
         <activity
-            android:name=".FoodEntry"
+            android:name=".FoodEntryActivity"
             android:label="@string/app_entry" />
         <activity android:name=".MainActivity">
             <intent-filter>
