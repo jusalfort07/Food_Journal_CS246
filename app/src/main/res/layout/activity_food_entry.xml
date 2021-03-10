@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FoodEntry"
+    tools:context=".FoodEntryActivity"
     android:id="@+id/form_FoodEntry">
 
     <View
@@ -47,7 +47,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txt_EntryTypeLbl">
 
         <RadioButton
-            android:id="@+id/idRadio1"
+            android:id="@+id/idSolid"
             android:padding="5dp"
             android:text="@string/solid"
             android:layout_width="wrap_content"
@@ -56,7 +56,7 @@
             android:textColor="@color/black" />
 
         <RadioButton
-            android:id="@+id/idRadio2"
+            android:id="@+id/idLiquid"
             android:padding="5dp"
             android:text="@string/liquid"
             android:layout_width="wrap_content"

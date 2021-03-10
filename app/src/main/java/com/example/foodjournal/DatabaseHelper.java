@@ -41,23 +41,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public boolean insertData(String foodType, String foodDesc, int foodQty,
-                              String dateIntake, String foodComments) {
+    public boolean insertData(FoodEntry entry) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COL2, foodType);
-        contentValues.put(COL3, foodDesc);
-        contentValues.put(COL4, foodQty);
-        contentValues.put(COL5, dateIntake);
-        contentValues.put(COL6, foodComments);
+        contentValues.put(COL2, entry.getFoodType());
+        contentValues.put(COL3, entry.getDescription());
+        contentValues.put(COL4, entry.getQuantity());
+        contentValues.put(COL5, entry.getEntryDate());
+        contentValues.put(COL6, entry.getComments());
 
         long result = db.insert(TABLE_NAME, null, contentValues);
 
         if (result == -1) {
             return false;
-        } else {
-            return true;
         }
+        return true;
     }
 
 
