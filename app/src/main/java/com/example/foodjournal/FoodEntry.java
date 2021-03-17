@@ -4,6 +4,12 @@ import java.util.Calendar;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
+/**
+ * This class receives the food the users eat
+ * @version 1.0
+ * @since March 17
+ * @author Java Champs
+ */
 public class FoodEntry {
     // Member variables
     String foodType;
