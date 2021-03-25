@@ -1,14 +1,20 @@
 package com.example.foodjournal;
 
+import android.app.ActionBar;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 
@@ -72,6 +78,39 @@ public class FoodReport extends AppCompatActivity {
                 showDateTimeDialog(endDate);
             }
         });
+
+        addTable();
+    }
+    //Add table layout and rows dynamically
+    public void addTable(){
+        TableLayout reportTable = (TableLayout) findViewById(R.id.table_report);
+        TableRow headerRow = new TableRow(this);
+        reportTable.setStretchAllColumns(false);
+        reportTable.setBackgroundColor(Color.parseColor("#ffffff"));
+
+
+        //Create headers for our table
+        TextView tv0 = new TextView(this);
+        tv0.setText("Description");
+        tv0.setTextColor(Color.BLACK);
+        headerRow.addView(tv0);
+
+        TextView tv1 = new TextView(this);
+        tv1.setText("Quantity");
+        tv1.setTextColor(Color.BLACK);
+        headerRow.addView(tv1);
+
+        TextView tv2 = new TextView(this);
+        tv2.setText("Date");
+        tv2.setTextColor(Color.BLACK);
+        headerRow.addView(tv2);
+
+        TextView tv3 = new TextView(this);
+        tv3.setText("Actions");
+        tv3.setTextColor(Color.BLACK);
+        headerRow.addView(tv3);
+
+        reportTable.addView(headerRow);
     }
 
     // Date and Time picker method...
