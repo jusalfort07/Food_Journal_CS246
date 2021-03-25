@@ -12,6 +12,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 
+/**
+ * Class that starts the execution of the program.
+ * @author java-champs
+ * @version 1.0
+ */
 public class MainActivity extends AppCompatActivity {
 
     Button btnStart, btnView, btnSettings;
@@ -21,6 +26,11 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences mPrefs;
     Editor prefsEditor;
 
+    /**
+     * Initialize the activity.
+     * @author java-champs
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         btnView = findViewById(R.id.btn_view);
         btnSettings = findViewById(R.id.btn_settings);
 
+        //When click the start button, call a new activity to type a food entry
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //When click the View button, call a new activity to see the report with all the food you record.
         btnView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //When click the Settings button, call a new activity to config the user settings
         btnSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,6 +90,12 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Create a new object with the user setting values.
+     * @author java-champs
+     * @version 1.0
+     * @return UserSettings object.
+     */
     public UserSettings getUserSettings(){
         Gson gson = new Gson();
         String json = mPrefs.getString("UserSettings", "");
@@ -84,6 +103,12 @@ public class MainActivity extends AppCompatActivity {
         return us;
     }
 
+    /**
+     * Save the user settings values.
+     * @author java-champs
+     * @version 1.0
+     * @param us UserSettings object
+     */
     public void saveUserSettings(UserSettings us){
         Gson gson = new Gson();
         String json = gson.toJson(us);
