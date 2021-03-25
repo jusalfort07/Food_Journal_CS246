@@ -157,15 +157,15 @@ public class FoodEntryActivity extends AppCompatActivity {
 
 
     // Date and Time picker method...
-    private void showDateTimeDialog(final EditText date_time_entry) {
-        final Calendar calendar = Calendar.getInstance();
+                private void showDateTimeDialog(final EditText date_time_entry) {
+                    final Calendar calendar = Calendar.getInstance();
 
-        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                calendar.set(Calendar.YEAR, year);
-                calendar.set(Calendar.MONTH, month);
-                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                    DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                            calendar.set(Calendar.YEAR, year);
+                            calendar.set(Calendar.MONTH, month);
+                            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
                 TimePickerDialog.OnTimeSetListener timeSetListener = new TimePickerDialog.OnTimeSetListener() {
                     @Override
