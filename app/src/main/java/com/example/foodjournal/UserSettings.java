@@ -1,12 +1,22 @@
 package com.example.foodjournal;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+/**
+ * This class receives personal information from the user.
+ * @param {string} name
+ * @param {string} email
+ * @param {bool} sendReport
+ * @param {string} frequency
+ * @since March 25
+ * @version 1.0
+ * @Author Java Champs - Camila
+ */
 public class UserSettings extends AppCompatActivity {
 
     // Member variables
