@@ -6,6 +6,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+/**
+ * This class handles the SQLITE CRUD (create, update, delete) of our app
+ * @version 1.0
+ * @since 18-March-2021
+ */
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "FoodJournal_CS246.db";
@@ -22,7 +27,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, 1);
     }
 
-
+    /**
+     * Method for creating the actual table for our food journal repository
+     * @param db SQLiteDatabase
+     * @return n/a
+     * @version 1.0 initial release
+     * @since 18-March-2021
+     */
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createTable = "CREATE TABLE " + TABLE_NAME +
@@ -32,7 +43,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(createTable);
     }
 
-
+    /**
+     * Method for upgrading the existing table for our food journal.
+     * It will remove the previous table by using "drop" command then
+     * will recreate the table by calling the onCreate method.
+     * @param db SQLiteDatabase
+     * @param oldVersion integer not being used right now
+     * @param newVersion integer not being used right now
+     * @return n/a
+     * @version 1.0 initial release
+     * @since 18-March-2021
+     */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         String upgradeTable = "DROP TABLE IF EXISTS " + TABLE_NAME;
@@ -40,7 +61,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-
+    /**
+     * Method for inserting record into the table for food journal entries
+     * @param entry FoodEntry object
+     * @return true if insert action was successful. false if an error occurred.
+     * @version 1.0 initial release
+     * @since 18-March-2021
+     */
     public boolean insertData(FoodEntry entry) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -59,6 +86,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+    /**
+     * Method to get all the records from the table where food entries are stored.
+     * @return res Cursor containing records of the given table
+     * @version 1.0 initial release
+     * @since 18-March-2021
+     */
     public Cursor getAllData() {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor res = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);

@@ -28,6 +28,11 @@ import static java.util.Calendar.MINUTE;
 import static java.util.Calendar.MONTH;
 import static java.util.Calendar.YEAR;
 
+/**
+ * Class which handles the actual page for entering of records into this app.
+ * @version 1.0 initial release
+ * @since 18-March-2021
+ */
 public class FoodEntryActivity extends AppCompatActivity {
 
     View appBackground2;
@@ -84,7 +89,15 @@ public class FoodEntryActivity extends AppCompatActivity {
         });
     }
 
-    // Add new entry into SQLite
+
+    /**
+     * Method which add new entry into SQLite table
+     * This method is triggered when the user clicked on the Save button.
+     * This will use the FoodEntry class and will inform user of the outcome
+     * using the Toast (message screen).
+     * @version 1.0 initial release
+     * @since 18-March-2021
+     */
     public void addData() {
         btnSave.setOnClickListener(
             new View.OnClickListener() {
@@ -113,40 +126,52 @@ public class FoodEntryActivity extends AppCompatActivity {
     }
 
 
-    // View all records in SQLite
-    // This is for testing only and will show records on the fly
-    // To be replace with simple show "Food Report" page.
+    /**
+     * Method is currently assigned on the VIEW button.
+     * This will show records on the fly and is only used to ensure that records
+     * are being inserted into the database. This will be replaced once the report
+     * activity is functioning.
+     * @version 1.0 initial release
+     * @since 18-March-2021
+     */
     public void viewData() {
         btnView.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Cursor res = myDB.getAllData();
-                        if (res.getCount() == 0) {
-                            showCustomMessage("Error", "Food Journal is empty!");
-                            return;
-                        } else {
+            new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Cursor res = myDB.getAllData();
+                    if (res.getCount() == 0) {
+                        showCustomMessage("Error", "Food Journal is empty!");
+                        return;
+                    } else {
 
-                            StringBuffer buffer = new StringBuffer();
-                            while (res.moveToNext()) {
-                                buffer.append("ID: " + res.getString(0) + "\n");
-                                buffer.append("TYPE: " + res.getString(1) + "\n");
-                                buffer.append("DESC: " + res.getString(2) + "\n");
-                                buffer.append("QTY: " + res.getString(3) + "\n");
-                                buffer.append("DATE: " + res.getString(4) + "\n");
-                                buffer.append("COMMENTS: " + res.getString(5) + "\n\n");
-                            }
-                            // Show all data
-                            showCustomMessage("Food Journal", buffer.toString());
+                        StringBuffer buffer = new StringBuffer();
+                        while (res.moveToNext()) {
+                            buffer.append("ID: " + res.getString(0) + "\n");
+                            buffer.append("TYPE: " + res.getString(1) + "\n");
+                            buffer.append("DESC: " + res.getString(2) + "\n");
+                            buffer.append("QTY: " + res.getString(3) + "\n");
+                            buffer.append("DATE: " + res.getString(4) + "\n");
+                            buffer.append("COMMENTS: " + res.getString(5) + "\n\n");
                         }
+                        // Show all data
+                        showCustomMessage("Food Journal", buffer.toString());
                     }
                 }
+            }
         );
 
     }
 
 
-    // Custom message view to show the records for testing... can also be used for other messages
+    /**
+     * Method to create custom message window. Currently being used to show the records for testing
+     * This can also be used for other messages needed within this app.
+     * @param title string used as title of the custom window
+     * @param msg string information that will be displayed inside the custom window
+     * @version 1.0 initial release
+     * @since 18-March-2021
+     */
     public void showCustomMessage(String title, String msg) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(true);
@@ -156,7 +181,13 @@ public class FoodEntryActivity extends AppCompatActivity {
     }
 
 
-    // Date and Time picker method...
+    /**
+     * Method which shows the system calendar and time selection windows for
+     * entering the date and time when the food/liquid is taken by the user.
+     * @param date_time_entry field where date and time is on the page
+     * @version 1.0 initial release
+     * @since 18-March-2021
+     */
     private void showDateTimeDialog(final EditText date_time_entry) {
         final Calendar calendar = Calendar.getInstance();
 
@@ -191,7 +222,12 @@ public class FoodEntryActivity extends AppCompatActivity {
     }
 
 
-    // Reset entry form
+    /**
+     * Method used to reset all input fields on the Food Entry form of the app
+     * @param group view group object or name to be cleared
+     * @version 1.0 initial release
+     * @since 18-March-2021
+     */
     private void clearForm(ViewGroup group) {
         for (int i = 0, count = group.getChildCount(); i < count; ++i) {
             View view = group.getChildAt(i);
