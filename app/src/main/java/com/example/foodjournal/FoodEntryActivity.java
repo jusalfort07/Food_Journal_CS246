@@ -121,7 +121,11 @@ public class FoodEntryActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Cursor res = myDB.getAllData();
+                        Intent intent = new Intent(getApplicationContext(), FoodReport.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+                    }
+                        /*Cursor res = myDB.getAllData();
                         if (res.getCount() == 0) {
                             showCustomMessage("Error", "Food Journal is empty!");
                             return;
@@ -139,7 +143,7 @@ public class FoodEntryActivity extends AppCompatActivity {
                             // Show all data
                             showCustomMessage("Food Journal", buffer.toString());
                         }
-                    }
+                    }*/
                 }
         );
 
