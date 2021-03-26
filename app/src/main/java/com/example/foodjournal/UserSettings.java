@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -24,8 +23,8 @@ public class UserSettings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_settings);
 
-        //Set save button
-        Button btnSave = (Button) findViewById(R.id.btn_save);
+        // Set save button
+        Button btnSave = (Button) findViewById(R.id.save);
         btnSave.setOnClickListener((v) -> {
             EditText name = (EditText)findViewById(R.id.name);
             EditText email = (EditText)findViewById(R.id.email);
@@ -47,7 +46,7 @@ public class UserSettings extends AppCompatActivity {
         });
     }
 
-    //Save activity instance
+    // Save activity instance
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);

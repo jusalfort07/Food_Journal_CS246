@@ -8,7 +8,9 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -62,14 +64,30 @@ public class FoodEntryActivity extends AppCompatActivity {
         btnSave = (Button) findViewById(R.id.btn_save);
         btnView = (Button) findViewById(R.id.btn_view);
         btnReturn2 = (Button) findViewById(R.id.btn_return2);
-        addData();
-        viewData();
+
+        foodDescTxt.addTextChangedListener(formTextWatcher);
+        foodQtyTxt.addTextChangedListener(formTextWatcher);
+        dtIntakeTxt.addTextChangedListener(formTextWatcher);
 
         // Set background
         appBackground2 = findViewById(R.id.appbg2);
         appBackground2.setBackgroundResource(R.drawable.bg_blue);
 
-        // Set return button
+
+        addData();
+        // The viewData() method is only used for testing purposes.
+        // It will show the current records using a custom message.
+        // viewData();
+
+        // Set the "View" button to show the FoodReportActivity
+        btnView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(FoodEntryActivity.this, FoodReportActivity.class));
+            }
+        });
+
+        // Set "Return to Main" button
         btnReturn2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // TODO Auto-generated method stub
@@ -103,6 +121,7 @@ public class FoodEntryActivity extends AppCompatActivity {
             new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     int selectedID = foodType.getCheckedRadioButtonId();
                     selectedFoodType = (RadioButton) findViewById(selectedID);
 
@@ -116,7 +135,7 @@ public class FoodEntryActivity extends AppCompatActivity {
                     boolean isInserted = myDB.insertData(entry);
                     if (isInserted) {
                         Toast.makeText(FoodEntryActivity.this,"Entry Saved!", Toast.LENGTH_LONG).show();
-                        clearForm((ViewGroup) findViewById(R.id.form_FoodEntry));
+//                        clearForm((ViewGroup) findViewById(R.id.form_FoodEntry));
                     } else {
                         Toast.makeText(FoodEntryActivity.this,"Entry NOT Saved!", Toast.LENGTH_LONG).show();
                     }
@@ -241,4 +260,24 @@ public class FoodEntryActivity extends AppCompatActivity {
             foodType.clearCheck();
         }
     }
+
+
+
+    private TextWatcher formTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            String descInput = foodDescTxt.getText().toString().trim();
+            String qtyInput = foodQtyTxt.getText().toString().trim();
+            String dateInput = dtIntakeTxt.getText().toString().trim();
+
+            btnSave.setEnabled(!descInput.isEmpty() && !qtyInput.isEmpty() && !dateInput.isEmpty());
+        }
+        @Override
+        public void afterTextChanged(Editable s) {
+        }
+//        EditText foodDescTxt, foodQtyTxt, dtIntakeTxt, foodCommentsTxt;
+    };
 }

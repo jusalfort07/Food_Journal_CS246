@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:descendantFocusability="blocksDescendants">
+
+    <TextView
+        android:id="@+id/lst_desc"
+        android:layout_marginStart="5dp"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:text="Description"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:textSize="18dp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/lst_mid_info"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginRight="2dp"
+        android:layout_toStartOf="@id/lst_btn_container"
+        android:layout_toEndOf="@id/lst_desc"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/lst_date"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:gravity="center"
+            android:text="Date" />
+
+        <TextView
+            android:id="@+id/lst_info"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:gravity="center"
+            android:text="Qty and Comments" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/lst_btn_container"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="5dp">
+
+        <Button
+            android:id="@+id/lst_edit"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:text="EDIT"
+            android:textAlignment="center"
+            android:layout_weight="70"
+            android:elevation="9dp"
+            android:layout_marginBottom="0dp"
+            android:paddingTop="1dp"
+            android:paddingBottom="0dp"
+            />
+        <Button
+            android:id="@+id/lst_delete"
+            android:textColor="@color/white"
+            android:background="@color/red_del"
+            android:layout_width="60dp"
+            android:layout_height="22dp"
+            android:text="DEL"
+            android:textAlignment="center"
+            android:layout_weight="70"
+            android:elevation="9dp"
+            android:layout_marginBottom="0dp"
+            android:paddingTop="1dp"
+            android:paddingBottom="0dp"
+
+            />
+    </LinearLayout>
+
+</RelativeLayout>

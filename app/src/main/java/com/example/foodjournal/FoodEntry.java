@@ -7,7 +7,9 @@ import java.text.SimpleDateFormat;
 /**
  * Class which handles the entering of records from the fields into the database.
  * @version 1.0 initial release
+ * @version 1.1 added recordID variable, setter and getter.
  * @since 18-March-2021
+ * @updated 26-March-2021
  */
 public class FoodEntry {
     // Member variables
@@ -16,6 +18,7 @@ public class FoodEntry {
     Integer quantity;
     String entryDate;
     String comments;
+    Integer recordID;
 
     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     Calendar cal = Calendar.getInstance();
@@ -80,6 +83,16 @@ public class FoodEntry {
     }
 
     /**
+     * Method for getting the value of the class variable
+     * @return recordID integer value
+     * @version 1.0 initial release
+     * @since 26-March-2021
+     */
+    public Integer getRecordID() {
+        return recordID;
+    }
+
+    /**
      * Method for setting a class variable value
      * @param description string describing the food/liquid intake
      * @version 1.0 initial release
@@ -123,5 +136,15 @@ public class FoodEntry {
      */
     public void setFoodType(String foodType) {
         this.foodType = foodType;
+    }
+
+    /**
+     * Method for setting a class variable value
+     * @param recID integer whether the intake is solid (food) or liquid
+     * @version 1.0 initial release
+     * @since 26-March-2021
+     */
+    public void setRecordID(Integer recID) {
+        this.recordID = recID;
     }
 }

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -19,6 +20,7 @@ import com.google.gson.Gson;
  */
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "MainActivity";
     Button btnStart, btnView, btnSettings;
     View appBackground;
 
@@ -35,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        Log.i(TAG, "MS - onCreate: Started.");
         // Get shared preferences
         mPrefs = getPreferences(MODE_PRIVATE);
         prefsEditor = mPrefs.edit();
@@ -77,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         btnView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, FoodReport.class));
+                startActivity(new Intent(MainActivity.this, FoodReportActivity.class));
             }
         });
 

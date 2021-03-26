@@ -6,6 +6,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 /**
  * This class handles the SQLITE CRUD (create, update, delete) of our app
  * @version 1.0
@@ -15,7 +20,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "FoodJournal_CS246.db";
     public static final String TABLE_NAME = "food_entry";
-    //public static final String COL1 = "ID";
+    public static final String COL1 = "ID";
     public static final String COL2 = "FOOD_TYPE";
     public static final String COL3 = "FOOD_DESCRIPTION";
     public static final String COL4 = "FOOD_QUANTITY";
@@ -64,7 +69,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     /**
      * Method for inserting record into the table for food journal entries
      * @param entry FoodEntry object
-     * @return true if insert action was successful. false if an error occurred.
+     * @return boolean - true if insert action was successful. false if an error occurred.
      * @version 1.0 initial release
      * @since 18-March-2021
      */
@@ -97,11 +102,112 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor res = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
         return res;
     }
+
+    /**
+     * Method to get records from the table stored in a List of FoodEntry object.
+     * @return returnList ArrayList containing records of the given table
+     * @version 1.0 initial release
+     * @since 26-March-2021
+     */
+    public ArrayList<FoodEntry> getFoodReport() {
+
+        ArrayList<FoodEntry> returnList = new ArrayList<FoodEntry>();
+
+        String queryString = "SELECT * FROM " + TABLE_NAME;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        while (cursor.moveToNext()) {
+            int recordID = cursor.getInt(0);
+            String foodType = cursor.getString(1);
+            String foodDesc = cursor.getString(2);
+            int foodQty = cursor.getInt(3);
+            String recordDate = cursor.getString(4);
+            String foodComment = cursor.getString(5);
+
+            FoodEntry fe = new FoodEntry();
+            fe.setRecordID(recordID);
+            fe.setFoodType(foodType);
+            fe.setDescription(foodDesc);
+            fe.setQuantity(foodQty);
+            fe.setEntryDate(recordDate);
+            fe.setComments(foodComment);
+            returnList.add(fe);
+        }
+        // clean up by closing objects
+        cursor.close();
+        db.close();
+        return returnList;
+    }
+
+    /**
+     * Method to DELETE record from the table .
+     * @return boolean - true if delete action was successful. false if an error occurred.
+     * @param entry is a FoodEntry object
+     * @version 1.0 initial release
+     * @since 26-March-2021
+     */
+    public boolean deleteData(FoodEntry entry) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String queryString = "DELETE FROM " + TABLE_NAME + " WHERE " + COL1 + " = " + entry.getRecordID();
+
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if (cursor.moveToFirst()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    // Alternative way to delete using record ID in the parameter
+    public void deleteDID(long id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(DatabaseHelper.TABLE_NAME,DatabaseHelper.COL1 + " = ?",
+                new String[]{String.valueOf(id)});
+        db.close();
+    }
+
+
+    /**
+     * Method to UPDATE record from the table .
+     * @param fid integer for record ID
+     * @param ftype string for food type.
+     * @param desc string for food description
+     * @param qty integer for food quantity
+     * @param fdate string for date intake
+     * @param cmnts string for comments
+     * @return boolean - true if update action was successful. false if an error occurred.
+     */
+    public boolean updateData(int fid, String ftype, String desc,
+                              int qty, String fdate, String cmnts) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String arguments = String.valueOf(fid);
+        String queryString = "SELECT * FROM " + TABLE_NAME + " WHERE " + COL1 + " = ?";
+
+        ContentValues contentValues =  new ContentValues();
+        contentValues.put("FOOD_TYPE", ftype);
+        contentValues.put("FOOD_DESCRIPTION", desc);
+        contentValues.put("FOOD_QUANTITY", qty);
+        contentValues.put("DATE_INTAKE", fdate);
+        contentValues.put("FOOD_COMMENTS", cmnts);
+
+        Cursor cursor = db.rawQuery(queryString, new String[]{arguments});
+        if (cursor.getCount() > 0) {
+            long result = db.update(TABLE_NAME, contentValues,
+                    "id=?", new String[]{arguments});
+            if (result == -1) {
+                return false;
+            } else {
+                return true;
+            }
+        } else {
+            return false;
+        }
+    }
+
 }
-
-
-
-
 
 
 

@@ -13,7 +13,7 @@
             android:name=".UserSettings"
             android:label="@string/app_setting"></activity>
         <activity
-            android:name=".FoodReport"
+            android:name=".FoodReportActivity"
             android:label="@string/app_view" />
         <activity
             android:name=".FoodEntryActivity"
