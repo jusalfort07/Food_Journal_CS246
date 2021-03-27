@@ -1,9 +1,11 @@
 package com.example.foodjournal;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
@@ -50,10 +52,15 @@ public class FoodReportAdapter extends ArrayAdapter<FoodEntry> {
         mainViewHolder.fEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Button clicked for Record ID " +
-                        fids.getRecordID(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "Button clicked for Record ID " +
+//                        fids.getRecordID(), Toast.LENGTH_SHORT).show();
+                Intent foodEntryIntent = new Intent(getContext(), FoodEntryActivity.class);
+                foodEntryIntent.putExtra("currentID", fids.getDescription());
+                foodEntryIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                getContext().startActivity(foodEntryIntent);
             }
         });
+
         mainViewHolder.fDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

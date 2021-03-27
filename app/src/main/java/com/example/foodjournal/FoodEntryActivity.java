@@ -45,6 +45,8 @@ public class FoodEntryActivity extends AppCompatActivity {
     RadioButton selectedFoodType;
     Button btnSave, btnView, btnReturn2;
 
+    String currentRecordID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,10 +71,14 @@ public class FoodEntryActivity extends AppCompatActivity {
         foodQtyTxt.addTextChangedListener(formTextWatcher);
         dtIntakeTxt.addTextChangedListener(formTextWatcher);
 
+        if (this.getIntent().hasExtra("currentID")) {
+            currentRecordID = getIntent().getExtras().get("currentID").toString();
+            Toast.makeText(this, currentRecordID, Toast.LENGTH_LONG).show();
+        }
+
         // Set background
         appBackground2 = findViewById(R.id.appbg2);
         appBackground2.setBackgroundResource(R.drawable.bg_blue);
-
 
         addData();
         // The viewData() method is only used for testing purposes.

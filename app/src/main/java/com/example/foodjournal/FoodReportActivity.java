@@ -2,9 +2,11 @@ package com.example.foodjournal;
 
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -47,6 +49,19 @@ public class FoodReportActivity extends AppCompatActivity {
         theNewList = foodDB.getFoodReport();
         Log.i(TAG, "MS - DB List created.");
         rptListView.setAdapter(new FoodReportAdapter(this, R.layout.adapter_food_report, theNewList));
+
+//        rptListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+//
+//                String currentID = adapterView.getItemAtPosition(position).toString();
+//                Log.i(TAG, "MS - click info: " + currentID);
+//
+//                Intent foodEntryIntent = new Intent(FoodReportActivity.this, FoodEntryActivity.class);
+//                foodEntryIntent.putExtra("currentID", currentID);
+//                startActivity(foodEntryIntent);
+//            }
+//        });
 
         // Set return button
         Button btnReturn3 = (Button) findViewById(R.id.btn_return3);
