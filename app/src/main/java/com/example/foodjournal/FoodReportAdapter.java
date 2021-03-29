@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -42,8 +43,10 @@ public class FoodReportAdapter extends ArrayAdapter<FoodEntry> {
             viewHolder.desc = (TextView) convertView.findViewById(R.id.lst_desc);
             viewHolder.date = (TextView) convertView.findViewById(R.id.lst_date);
             viewHolder.info = (TextView) convertView.findViewById(R.id.lst_info);
-            viewHolder.fEdit = (Button) convertView.findViewById(R.id.lst_edit);
-            viewHolder.fDelete = (Button) convertView.findViewById(R.id.lst_delete);
+//            viewHolder.fEdit1 = (Button) convertView.findViewById(R.id.lst_edit);
+//            viewHolder.fDelete1 = (Button) convertView.findViewById(R.id.lst_delete);
+            viewHolder.fEdit = (ImageButton) convertView.findViewById(R.id.lst_edit);
+            viewHolder.fDelete = (ImageButton) convertView.findViewById(R.id.lst_delete);
             convertView.setTag(viewHolder);
 //          Log.i(TAG, "MS - Null object set.");
         }
@@ -65,7 +68,7 @@ public class FoodReportAdapter extends ArrayAdapter<FoodEntry> {
             @Override
             public void onClick(View v) {
                     DatabaseHelper db = new DatabaseHelper(getContext());
-                    db.deleteData(fids);
+                    db.deleteEntry(fids);
                     dataList.remove(position);
                     notifyDataSetChanged();
                     Toast.makeText(getContext(),"Deleted Record ID: " + fids.getRecordID() +
@@ -86,8 +89,10 @@ public class FoodReportAdapter extends ArrayAdapter<FoodEntry> {
         TextView desc;
         TextView date;
         TextView info;
-        Button fEdit;
-        Button fDelete;
+        ImageButton fEdit;
+        ImageButton fDelete;
+        Button fEdit1;
+        Button fDelete1;
     }
 }
 

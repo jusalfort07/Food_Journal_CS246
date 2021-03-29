@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".FoodEntryActivity"
-    android:id="@+id/form_FoodEntry">
+    android:id="@+id/form_FoodEntry"
+    android:focusableInTouchMode="true">
 
     <View
         android:id="@+id/appbg2"

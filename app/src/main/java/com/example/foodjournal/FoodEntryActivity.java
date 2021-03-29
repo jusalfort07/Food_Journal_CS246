@@ -142,10 +142,18 @@ public class FoodEntryActivity extends AppCompatActivity {
 
         // Date and Time Picker codes...
         dtIntakeTxt.setInputType(InputType.TYPE_NULL);
-        dtIntakeTxt.setOnClickListener(new View.OnClickListener() {
+//        dtIntakeTxt.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                showDateTimeDialog(dtIntakeTxt);
+//            }
+//        });
+        dtIntakeTxt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onClick(View v) {
-                showDateTimeDialog(dtIntakeTxt);
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    showDateTimeDialog(dtIntakeTxt);
+                }
             }
         });
     }
@@ -175,7 +183,7 @@ public class FoodEntryActivity extends AppCompatActivity {
                     entry.setEntryDate(dtIntakeTxt.getText().toString());
                     entry.setComments(foodCommentsTxt.getText().toString());
 
-                    boolean isInserted = myDB.insertData(entry);
+                    boolean isInserted = myDB.addEntry(entry);
                     if (isInserted) {
                         Toast.makeText(FoodEntryActivity.this,"Entry Saved!", Toast.LENGTH_LONG).show();
 
@@ -356,7 +364,7 @@ public class FoodEntryActivity extends AppCompatActivity {
                     current.setEntryDate(dtIntakeTxt.getText().toString());
                     current.setComments(foodCommentsTxt.getText().toString());
 
-                    boolean isUpdated = myDB.updateData(current);
+                    boolean isUpdated = myDB.updateEntry(current);
                     if (isUpdated) {
                         Toast.makeText(FoodEntryActivity.this,"Entry Updated!", Toast.LENGTH_LONG).show();
                         startActivity(new Intent(FoodEntryActivity.this, FoodReportActivity.class));

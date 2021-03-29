@@ -74,7 +74,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @version 1.0 initial release
      * @since 18-March-2021
      */
-    public boolean insertData(FoodEntry entry) {
+    public boolean addEntry(FoodEntry entry) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL2, entry.getFoodType());
@@ -93,6 +93,62 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     /**
+     * Method for inserting record into the table for food journal entries
+     * @param entry FoodEntry object
+     * @return boolean - true if insert action was successful. false if an error occurred.
+     * @version 1.0 initial release
+     * @since 29-March-2021
+     */
+    public boolean updateEntry(FoodEntry entry) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL2, entry.getFoodType());
+        contentValues.put(COL3, entry.getDescription());
+        contentValues.put(COL4, entry.getQuantity());
+        contentValues.put(COL5, entry.getEntryDate());
+        contentValues.put(COL6, entry.getComments());
+
+        String queryRecExist = "SELECT * FROM " + TABLE_NAME +
+                " WHERE " + COL1 + " = " + entry.getRecordID();
+        Cursor cursor = db.rawQuery(queryRecExist, null);
+        if (cursor.getCount() == 1) {
+
+            String arguments = String.valueOf(entry.getRecordID());
+            long result = db.update(TABLE_NAME, contentValues,
+                    "id=?", new String[]{arguments});
+            if (result == -1) {
+                return false;
+            } else {
+                return true;
+            }
+        } else {
+            return false;
+        }
+    }
+
+
+    /**
+     * Method to DELETE record from the table .
+     * @return boolean - true if delete action was successful. false if an error occurred.
+     * @param entry is a FoodEntry object
+     * @version 1.0 initial release
+     * @since 26-March-2021
+     */
+    public boolean deleteEntry(FoodEntry entry) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String queryString = "DELETE FROM " + TABLE_NAME + " WHERE " + COL1 + " = " + entry.getRecordID();
+
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if (cursor.moveToFirst()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
+    /**
      * Method to get all the records from the table where food entries are stored.
      * @return res Cursor containing records of the given table
      * @version 1.0 initial release
@@ -106,12 +162,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     /**
+     * Method to get the current record for editing purposes
+     * @param id integer for record ID
+     * @return Cursor
+     */
+    public Cursor getCurrentData(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String queryString = "SELECT * FROM " + TABLE_NAME + " WHERE " + COL1 + " = " + id + "";
+        Cursor res =  db.rawQuery( queryString, null );
+        return res;
+    }
+
+
+    /**
      * Method to get records from the table stored in a List of FoodEntry object.
      * @return returnList ArrayList containing records of the given table
      * @version 1.0 initial release
      * @since 26-March-2021
      */
-    public ArrayList<FoodEntry> getFoodReport() {
+    public ArrayList<FoodEntry> getAllEntry() {
 
         ArrayList<FoodEntry> returnList = new ArrayList<FoodEntry>();
 
@@ -149,7 +218,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @version 1.0 initial release
      * @since 26-March-2021
      */
-    public ArrayList<FoodEntry> getFilteredReport(String dtFrom, String dtTo) {
+    public ArrayList<FoodEntry> getFilteredEntry(String dtFrom, String dtTo) {
 
         ArrayList<FoodEntry> returnList = new ArrayList<FoodEntry>();
 
@@ -183,72 +252,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     /**
-     * Method to DELETE record from the table .
-     * @return boolean - true if delete action was successful. false if an error occurred.
-     * @param entry is a FoodEntry object
-     * @version 1.0 initial release
-     * @since 26-March-2021
-     */
-    public boolean deleteData(FoodEntry entry) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        String queryString = "DELETE FROM " + TABLE_NAME + " WHERE " + COL1 + " = " + entry.getRecordID();
-
-        Cursor cursor = db.rawQuery(queryString, null);
-
-        if (cursor.moveToFirst()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-
-    // Alternative way to delete using record ID in the parameter
-    public void deleteDID(long id){
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(DatabaseHelper.TABLE_NAME,DatabaseHelper.COL1 + " = ?",
-                new String[]{String.valueOf(id)});
-        db.close();
-    }
-
-
-    /**
-     * Method for inserting record into the table for food journal entries
-     * @param entry FoodEntry object
-     * @return boolean - true if insert action was successful. false if an error occurred.
-     * @version 1.0 initial release
-     * @since 29-March-2021
-     */
-    public boolean updateData(FoodEntry entry) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(COL2, entry.getFoodType());
-        contentValues.put(COL3, entry.getDescription());
-        contentValues.put(COL4, entry.getQuantity());
-        contentValues.put(COL5, entry.getEntryDate());
-        contentValues.put(COL6, entry.getComments());
-
-        String queryRecExist = "SELECT * FROM " + TABLE_NAME +
-                " WHERE " + COL1 + " = " + entry.getRecordID();
-        Cursor cursor = db.rawQuery(queryRecExist, null);
-        if (cursor.getCount() == 1) {
-
-            String arguments = String.valueOf(entry.getRecordID());
-            long result = db.update(TABLE_NAME, contentValues,
-                    "id=?", new String[]{arguments});
-            if (result == -1) {
-                return false;
-            } else {
-                return true;
-            }
-        } else {
-            return false;
-        }
-    }
-
-
-    /**
-     * Method to UPDATE record from the table .
+     * Alternative method to UPDATE record from the table using parameters.
      * @param fid integer for record ID
      * @param ftype string for food type.
      * @param desc string for food description
@@ -286,15 +290,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     /**
-     * Method to get the current record for editing purposes
-     * @param id integer for record ID
-     * @return Cursor
+     * Alternative method to delete entry using record ID in the parameter
+     * @param id
      */
-    public Cursor getCurrentData(int id) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        String queryString = "SELECT * FROM " + TABLE_NAME + " WHERE " + COL1 + " = " + id + "";
-        Cursor res =  db.rawQuery( queryString, null );
-        return res;
+    public void deleteID(long id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(DatabaseHelper.TABLE_NAME,DatabaseHelper.COL1 + " = ?",
+                new String[]{String.valueOf(id)});
+        db.close();
     }
 }
 

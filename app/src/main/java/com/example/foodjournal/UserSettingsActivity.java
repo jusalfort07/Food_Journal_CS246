@@ -59,16 +59,12 @@ public class UserSettingsActivity extends AppCompatActivity {
             } else {
                 chkSendRpt.setChecked(false);
             }
-
             if (myGetUserSettings.getFrequency().equals("Weekly")) {
                 optWeek.setChecked(true);
             }
-
             if (myGetUserSettings.getFrequency().equals("Monthly")) {
                 optMonth.setChecked(true);
             }
-
-            System.out.println("frequency: " + myGetUserSettings.getFrequency());
         }
 
         // Set save button
@@ -142,7 +138,7 @@ public class UserSettingsActivity extends AppCompatActivity {
         String json = gson.toJson(us);
         prefsEditor.putString("UserSettings", json);
         prefsEditor.commit();
-        Toast.makeText(getApplicationContext(), "User settings stored", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getApplicationContext(), "User settings stored", Toast.LENGTH_SHORT).show();
     }
 }
 

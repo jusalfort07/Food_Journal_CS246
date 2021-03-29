@@ -1,6 +1,5 @@
 package com.example.foodjournal;
 
-
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
@@ -33,7 +32,6 @@ import static java.util.Calendar.YEAR;
 
 public class FoodReportActivity extends AppCompatActivity {
 
-//    View appBackground3;
     DatabaseHelper foodDB;
     EditText dtFilterFromTxt, dtFilterToTxt;
     ListView rptListView;
@@ -45,24 +43,56 @@ public class FoodReportActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_report_ms);
-        Log.i(TAG, "MS - onCreate: Started.");
+//        Log.i(TAG, "MS - onCreate: Started.");
 
         dtFilterFromTxt = (EditText) findViewById(R.id.txt_FilterStartDate);
         dtFilterToTxt = (EditText) findViewById(R.id.txt_FilterEndDate);
         rptListView = (ListView) findViewById(R.id.listView);
         foodDB = new DatabaseHelper(this);
-        Log.i(TAG, "MS - Database Object Created.");
+//        Log.i(TAG, "MS - Database Object Created.");
 
         theNewList = new ArrayList<FoodEntry>();
         String dtFrom = dtFilterFromTxt.getText().toString();
         String dtTo = dtFilterToTxt.getText().toString();
         if (dtFrom.matches("") || dtTo.matches("")) {
-            theNewList = foodDB.getFoodReport();
+            theNewList = foodDB.getAllEntry();
         } else {
-            theNewList = foodDB.getFilteredReport(dtFrom, dtTo);
+            theNewList = foodDB.getFilteredEntry(dtFrom, dtTo);
         }
-        Log.i(TAG, "MS - DB List created.");
+
         rptListView.setAdapter(new FoodReportAdapter(this, R.layout.adapter_food_report, theNewList));
+
+
+        // Date and Time Picker codes...
+        dtFilterFromTxt.setInputType(InputType.TYPE_NULL);
+//        dtFilterFromTxt.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                showDateDialog(dtFilterFromTxt);
+//            }
+//        });
+        dtFilterFromTxt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    showDateDialog(dtFilterFromTxt);
+                }
+            }
+        });
+
+        dtFilterToTxt.setInputType(InputType.TYPE_NULL);
+//        dtFilterToTxt.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                showDateDialog(dtFilterToTxt);
+//            }
+//        });
+        dtFilterToTxt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                showDateDialog(dtFilterToTxt);
+            }
+        });
 
         // Set filter button
         Button btnFilter = (Button) findViewById(R.id.btn_filter);
@@ -73,11 +103,11 @@ public class FoodReportActivity extends AppCompatActivity {
                 String dtTo = dtFilterToTxt.getText().toString();
                 rptListView.setAdapter(null);
                 if (dtFrom.matches("") || dtTo.matches("")) {
-                    theNewList = foodDB.getFoodReport();
+                    theNewList = foodDB.getAllEntry();
                     Toast.makeText(FoodReportActivity.this, "No Filter Applied", Toast.LENGTH_SHORT).show();
                 } else {
                     theNewList.clear();
-                    theNewList = foodDB.getFilteredReport(dtFrom, dtTo);
+                    theNewList = foodDB.getFilteredEntry(dtFrom, dtTo);
                     int arrSize = theNewList.size();
                     Toast.makeText(FoodReportActivity.this, "Filter result: " + arrSize, Toast.LENGTH_SHORT).show();
                 }
@@ -92,7 +122,7 @@ public class FoodReportActivity extends AppCompatActivity {
             public void onClick(View v) {
                 dtFilterFromTxt.setText("");
                 dtFilterToTxt.setText("");
-                theNewList = foodDB.getFoodReport();
+                theNewList = foodDB.getAllEntry();
                 rptListView.setAdapter(null);
                 rptListView.setAdapter(new FoodReportAdapter(FoodReportActivity.this, R.layout.adapter_food_report, theNewList));
                 Toast.makeText(FoodReportActivity.this, "Filter Cleared!", Toast.LENGTH_SHORT).show();
@@ -103,26 +133,9 @@ public class FoodReportActivity extends AppCompatActivity {
         Button btnReturn3 = (Button) findViewById(R.id.btn_return3);
         btnReturn3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                // TODO Auto-generated method stub
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
-            }
-        });
-
-        // Date and Time Picker codes...
-        dtFilterFromTxt.setInputType(InputType.TYPE_NULL);
-        dtFilterFromTxt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDateDialog(dtFilterFromTxt);
-            }
-        });
-        dtFilterToTxt.setInputType(InputType.TYPE_NULL);
-        dtFilterToTxt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDateDialog(dtFilterToTxt);
             }
         });
     }
