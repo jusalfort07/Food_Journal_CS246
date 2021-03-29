@@ -42,8 +42,7 @@ public class FoodEntryActivity extends AppCompatActivity {
     DatabaseHelper myDB;
     EditText foodDescTxt, foodQtyTxt, dtIntakeTxt, foodCommentsTxt;
     RadioGroup foodType;
-    RadioButton solidType, liquidType;
-    RadioButton selectedFoodType;
+    RadioButton solidType, liquidType, selectedFoodType;
     Button btnSave, btnView, btnReturn2;
     Integer currentRecordID;
 

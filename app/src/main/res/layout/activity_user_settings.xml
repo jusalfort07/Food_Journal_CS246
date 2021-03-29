@@ -94,34 +94,45 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.591" />
 
-    <CheckBox
-        android:id="@+id/weekly"
-        android:layout_width="81dp"
-        android:layout_height="30dp"
-        android:text="@string/weekly"
-        android:textColor="@color/white"
-        android:textColorLink="#2196F3"
+    <RadioGroup
+        android:id="@+id/rptFrequency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/appbg4"
         app:layout_constraintHorizontal_bias="0.19"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.656" />
+        app:layout_constraintVertical_bias="0.70">
 
+        <RadioButton
+            android:id="@+id/weekly"
+            android:layout_width="81dp"
+            android:layout_height="30dp"
+            android:text="@string/weekly"
+            android:textColor="@color/white"
+            android:textColorLink="#2196F3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/appbg4"
+            app:layout_constraintHorizontal_bias="0.19"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.656" />
 
-    <CheckBox
-        android:id="@+id/monthly"
-        android:layout_width="84dp"
-        android:layout_height="32dp"
-        android:text="@string/monthly"
-        android:textColor="@color/white"
-        android:textColorLink="#2196F3"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.192"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.725" />
+        <RadioButton
+            android:id="@+id/monthly"
+            android:layout_width="84dp"
+            android:layout_height="32dp"
+            android:text="@string/monthly"
+            android:textColor="@color/white"
+            android:textColorLink="#2196F3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.192"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.725" />
+    </RadioGroup>
 
     <Button
         android:id="@+id/save"

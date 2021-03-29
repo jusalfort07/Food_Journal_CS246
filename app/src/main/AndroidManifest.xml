@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".UserSettings"
+            android:name=".UserSettingsActivity"
             android:label="@string/app_setting"></activity>
         <activity
             android:name=".FoodReportActivity"
