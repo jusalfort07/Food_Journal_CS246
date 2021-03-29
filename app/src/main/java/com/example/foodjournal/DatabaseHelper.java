@@ -26,11 +26,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COL4 = "FOOD_QUANTITY";
     public static final String COL5 = "DATE_INTAKE";
     public static final String COL6 = "FOOD_COMMENTS";
-
-
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
     }
+
 
     /**
      * Method for creating the actual table for our food journal repository
@@ -47,6 +46,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "  DATE_INTAKE TEXT, FOOD_COMMENTS TEXT)";
         db.execSQL(createTable);
     }
+
 
     /**
      * Method for upgrading the existing table for our food journal.
@@ -65,6 +65,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(upgradeTable);
         onCreate(db);
     }
+
 
     /**
      * Method for inserting record into the table for food journal entries
@@ -103,6 +104,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return res;
     }
 
+
     /**
      * Method to get records from the table stored in a List of FoodEntry object.
      * @return returnList ArrayList containing records of the given table
@@ -140,6 +142,46 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return returnList;
     }
 
+
+    /**
+     * Method to get records from the table stored in a List of FoodEntry object.
+     * @return returnList ArrayList containing records of the given table
+     * @version 1.0 initial release
+     * @since 26-March-2021
+     */
+    public ArrayList<FoodEntry> getFilteredReport(String dtFrom, String dtTo) {
+
+        ArrayList<FoodEntry> returnList = new ArrayList<FoodEntry>();
+
+        String queryString = "SELECT * FROM " + TABLE_NAME +
+                " WHERE " + COL5 + " BETWEEN '" + dtFrom + "' AND '" + dtTo + "'";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        while (cursor.moveToNext()) {
+            int recordID = cursor.getInt(0);
+            String foodType = cursor.getString(1);
+            String foodDesc = cursor.getString(2);
+            int foodQty = cursor.getInt(3);
+            String recordDate = cursor.getString(4);
+            String foodComment = cursor.getString(5);
+
+            FoodEntry fe = new FoodEntry();
+            fe.setRecordID(recordID);
+            fe.setFoodType(foodType);
+            fe.setDescription(foodDesc);
+            fe.setQuantity(foodQty);
+            fe.setEntryDate(recordDate);
+            fe.setComments(foodComment);
+            returnList.add(fe);
+        }
+        // clean up by closing objects
+        cursor.close();
+        db.close();
+        return returnList;
+    }
+
+
     /**
      * Method to DELETE record from the table .
      * @return boolean - true if delete action was successful. false if an error occurred.
@@ -171,6 +213,41 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     /**
+     * Method for inserting record into the table for food journal entries
+     * @param entry FoodEntry object
+     * @return boolean - true if insert action was successful. false if an error occurred.
+     * @version 1.0 initial release
+     * @since 29-March-2021
+     */
+    public boolean updateData(FoodEntry entry) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL2, entry.getFoodType());
+        contentValues.put(COL3, entry.getDescription());
+        contentValues.put(COL4, entry.getQuantity());
+        contentValues.put(COL5, entry.getEntryDate());
+        contentValues.put(COL6, entry.getComments());
+
+        String queryRecExist = "SELECT * FROM " + TABLE_NAME +
+                " WHERE " + COL1 + " = " + entry.getRecordID();
+        Cursor cursor = db.rawQuery(queryRecExist, null);
+        if (cursor.getCount() == 1) {
+
+            String arguments = String.valueOf(entry.getRecordID());
+            long result = db.update(TABLE_NAME, contentValues,
+                    "id=?", new String[]{arguments});
+            if (result == -1) {
+                return false;
+            } else {
+                return true;
+            }
+        } else {
+            return false;
+        }
+    }
+
+
+    /**
      * Method to UPDATE record from the table .
      * @param fid integer for record ID
      * @param ftype string for food type.
@@ -180,7 +257,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @param cmnts string for comments
      * @return boolean - true if update action was successful. false if an error occurred.
      */
-    public boolean updateData(int fid, String ftype, String desc,
+    public boolean updateDataParam(int fid, String ftype, String desc,
                               int qty, String fdate, String cmnts) {
         SQLiteDatabase db = this.getWritableDatabase();
         String arguments = String.valueOf(fid);
@@ -207,6 +284,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+
+    /**
+     * Method to get the current record for editing purposes
+     * @param id integer for record ID
+     * @return Cursor
+     */
+    public Cursor getCurrentData(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String queryString = "SELECT * FROM " + TABLE_NAME + " WHERE " + COL1 + " = " + id + "";
+        Cursor res =  db.rawQuery( queryString, null );
+        return res;
+    }
 }
 
 

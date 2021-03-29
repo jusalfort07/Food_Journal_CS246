@@ -52,6 +52,18 @@
         android:textColor="@color/white"
         android:layout_toEndOf="@id/txt_FilterEndDate"/>
 
+    <Button
+        android:id="@+id/btn_clearfilter"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:elevation="9dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/btn_ltgray"
+        android:text="x"
+        android:textColor="@color/white"
+        android:layout_toEndOf="@id/btn_filter"/>
+
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"

@@ -19,11 +19,13 @@ public class FoodReportAdapter extends ArrayAdapter<FoodEntry> {
     private int layout;
     private static final String TAG = "FoodReportAdapter";
     ArrayList<FoodEntry> dataList = new ArrayList<FoodEntry>();
+    FoodReportAdapter adapter;
 
     public FoodReportAdapter(Context context, int resource, ArrayList<FoodEntry> data) {
         super(context, resource, data);
         dataList = data;
         layout = resource;
+        this.adapter = this;
 //      Log.i(TAG, "MS - MyListAdapter object created.");
     }
 
@@ -52,10 +54,8 @@ public class FoodReportAdapter extends ArrayAdapter<FoodEntry> {
         mainViewHolder.fEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Toast.makeText(getContext(), "Button clicked for Record ID " +
-//                        fids.getRecordID(), Toast.LENGTH_SHORT).show();
                 Intent foodEntryIntent = new Intent(getContext(), FoodEntryActivity.class);
-                foodEntryIntent.putExtra("currentID", fids.getDescription());
+                foodEntryIntent.putExtra("currentID", fids.getRecordID());
                 foodEntryIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 getContext().startActivity(foodEntryIntent);
             }
@@ -65,7 +65,6 @@ public class FoodReportAdapter extends ArrayAdapter<FoodEntry> {
             @Override
             public void onClick(View v) {
                     DatabaseHelper db = new DatabaseHelper(getContext());
-//                    db.deleteDID(fids.getRecordID());
                     db.deleteData(fids);
                     dataList.remove(position);
                     notifyDataSetChanged();
@@ -79,6 +78,7 @@ public class FoodReportAdapter extends ArrayAdapter<FoodEntry> {
         mainViewHolder.desc.setText(fids.getDescription());
         mainViewHolder.date.setText(fids.getEntryDate());
         mainViewHolder.info.setText("TYPE: " + fids.getFoodType() + " | QTY: "+fids.getQuantity());
+
         return convertView;
     }
 

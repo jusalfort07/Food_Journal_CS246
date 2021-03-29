@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -41,16 +42,20 @@ public class FoodEntryActivity extends AppCompatActivity {
     DatabaseHelper myDB;
     EditText foodDescTxt, foodQtyTxt, dtIntakeTxt, foodCommentsTxt;
     RadioGroup foodType;
-
+    RadioButton solidType, liquidType;
     RadioButton selectedFoodType;
     Button btnSave, btnView, btnReturn2;
+    Integer currentRecordID;
 
-    String currentRecordID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_entry);
+
+        // Set activity background
+        appBackground2 = findViewById(R.id.appbg2);
+        appBackground2.setBackgroundResource(R.drawable.bg_blue);
 
         // Set variables to corresponding fields, buttons on the layout
         myDB = new DatabaseHelper(this);
@@ -61,7 +66,9 @@ public class FoodEntryActivity extends AppCompatActivity {
         foodCommentsTxt = (EditText) findViewById(R.id.txt_Comments);
 
         foodType = (RadioGroup) findViewById(R.id.idRadioGroup);
-        foodType.check(R.id.idSolid);
+        //foodType.check(R.id.idSolid);
+        solidType = (RadioButton) findViewById(R.id.idSolid);
+        liquidType = (RadioButton) findViewById(R.id.idLiquid);
 
         btnSave = (Button) findViewById(R.id.btn_save);
         btnView = (Button) findViewById(R.id.btn_view);
@@ -71,16 +78,47 @@ public class FoodEntryActivity extends AppCompatActivity {
         foodQtyTxt.addTextChangedListener(formTextWatcher);
         dtIntakeTxt.addTextChangedListener(formTextWatcher);
 
-        if (this.getIntent().hasExtra("currentID")) {
-            currentRecordID = getIntent().getExtras().get("currentID").toString();
-            Toast.makeText(this, currentRecordID, Toast.LENGTH_LONG).show();
+        Bundle extras = getIntent().getExtras();
+        if(extras != null) {
+            int Value = extras.getInt("currentID");
+
+            if (Value > 0) {
+                Cursor rs = myDB.getCurrentData(Value);
+                currentRecordID = Value;
+                rs.moveToFirst();
+
+                String ftype = rs.getString(rs.getColumnIndex(DatabaseHelper.COL2));
+                String desc = rs.getString(rs.getColumnIndex(DatabaseHelper.COL3));
+                String qty = rs.getString(rs.getColumnIndex(DatabaseHelper.COL4));
+                String dtIn = rs.getString(rs.getColumnIndex(DatabaseHelper.COL5));
+                String cmnt = rs.getString(rs.getColumnIndex(DatabaseHelper.COL6));
+
+                if (!rs.isClosed())  {
+                    rs.close();
+                }
+                Log.i("TEST", "This is rs type value ["+ftype+"]");
+
+                if (ftype.equals("Solid")) {
+                    solidType.setChecked(true);
+
+                }
+                if (ftype.equals("Liquid")) {
+                    liquidType.setChecked(true);
+                }
+                foodDescTxt.setText((CharSequence)desc);
+                foodQtyTxt.setText((CharSequence)qty);
+                dtIntakeTxt.setText((CharSequence)dtIn);
+                foodCommentsTxt.setText((CharSequence)cmnt);
+
+                // Call the updateData method
+                updateData(currentRecordID);
+            }
+        } else {
+
+            // If current ID is blank then call the addData method instead
+            addData();
         }
 
-        // Set background
-        appBackground2 = findViewById(R.id.appbg2);
-        appBackground2.setBackgroundResource(R.drawable.bg_blue);
-
-        addData();
         // The viewData() method is only used for testing purposes.
         // It will show the current records using a custom message.
         // viewData();
@@ -141,7 +179,9 @@ public class FoodEntryActivity extends AppCompatActivity {
                     boolean isInserted = myDB.insertData(entry);
                     if (isInserted) {
                         Toast.makeText(FoodEntryActivity.this,"Entry Saved!", Toast.LENGTH_LONG).show();
-//                        clearForm((ViewGroup) findViewById(R.id.form_FoodEntry));
+
+                        // Clearing the form after successfully saving the data
+                        clearForm((ViewGroup) findViewById(R.id.form_FoodEntry));
                     } else {
                         Toast.makeText(FoodEntryActivity.this,"Entry NOT Saved!", Toast.LENGTH_LONG).show();
                     }
@@ -185,7 +225,6 @@ public class FoodEntryActivity extends AppCompatActivity {
                 }
             }
         );
-
     }
 
 
@@ -268,7 +307,12 @@ public class FoodEntryActivity extends AppCompatActivity {
     }
 
 
-
+    /**
+     * This will "Disable" the SAVE button until the user fill in the following fields:
+     * 1. Description
+     * 2. Quantity
+     * 3. Date when the food was taken
+     */
     private TextWatcher formTextWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -286,4 +330,43 @@ public class FoodEntryActivity extends AppCompatActivity {
         }
 //        EditText foodDescTxt, foodQtyTxt, dtIntakeTxt, foodCommentsTxt;
     };
+
+
+    /**
+     * Method which add new entry into SQLite table
+     * This method is triggered when the user clicked on the Save button.
+     * This will use the FoodEntry class and will inform user of the outcome
+     * using the Toast (message screen).
+     * @version 1.0 initial release
+     * @since 18-March-2021
+     */
+    public void updateData(int recID) {
+        btnSave.setOnClickListener(
+            new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    int selectedID = foodType.getCheckedRadioButtonId();
+                    selectedFoodType = (RadioButton) findViewById(selectedID);
+
+                    FoodEntry current = new FoodEntry();
+                    current.setRecordID(recID);
+                    current.setFoodType(selectedFoodType.getText().toString());
+                    current.setDescription(foodDescTxt.getText().toString());
+                    current.setQuantity(Integer.parseInt(foodQtyTxt.getText().toString()));
+                    current.setEntryDate(dtIntakeTxt.getText().toString());
+                    current.setComments(foodCommentsTxt.getText().toString());
+
+                    boolean isUpdated = myDB.updateData(current);
+                    if (isUpdated) {
+                        Toast.makeText(FoodEntryActivity.this,"Entry Updated!", Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(FoodEntryActivity.this, FoodReportActivity.class));
+
+                    } else {
+                        Toast.makeText(FoodEntryActivity.this,"Entry NOT Updated!", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+        );
+    }
 }
