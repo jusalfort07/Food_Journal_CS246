@@ -142,12 +142,6 @@ public class FoodEntryActivity extends AppCompatActivity {
 
         // Date and Time Picker codes...
         dtIntakeTxt.setInputType(InputType.TYPE_NULL);
-//        dtIntakeTxt.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showDateTimeDialog(dtIntakeTxt);
-//            }
-//        });
         dtIntakeTxt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -337,7 +331,6 @@ public class FoodEntryActivity extends AppCompatActivity {
         @Override
         public void afterTextChanged(Editable s) {
         }
-//        EditText foodDescTxt, foodQtyTxt, dtIntakeTxt, foodCommentsTxt;
     };
 
 

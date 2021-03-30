@@ -24,9 +24,6 @@ public class MainActivity extends AppCompatActivity {
     Button btnStart, btnView, btnSettings;
     View appBackground;
 
-//    // Shared preferences
-//    SharedPreferences mPrefs;
-//    Editor prefsEditor;
 
     /**
      * Initialize the activity.

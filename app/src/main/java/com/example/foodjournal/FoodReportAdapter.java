@@ -43,8 +43,6 @@ public class FoodReportAdapter extends ArrayAdapter<FoodEntry> {
             viewHolder.desc = (TextView) convertView.findViewById(R.id.lst_desc);
             viewHolder.date = (TextView) convertView.findViewById(R.id.lst_date);
             viewHolder.info = (TextView) convertView.findViewById(R.id.lst_info);
-//            viewHolder.fEdit1 = (Button) convertView.findViewById(R.id.lst_edit);
-//            viewHolder.fDelete1 = (Button) convertView.findViewById(R.id.lst_delete);
             viewHolder.fEdit = (ImageButton) convertView.findViewById(R.id.lst_edit);
             viewHolder.fDelete = (ImageButton) convertView.findViewById(R.id.lst_delete);
             convertView.setTag(viewHolder);

@@ -26,6 +26,7 @@ public class FoodReportActivity extends AppCompatActivity {
 
     DatabaseHelper foodDB;
     EditText dtFilterFromTxt, dtFilterToTxt;
+    Button btnFilter;
     ListView rptListView;
     ArrayList<FoodEntry> theNewList;
     FoodReportAdapter rAdapter;
@@ -40,6 +41,10 @@ public class FoodReportActivity extends AppCompatActivity {
         dtFilterFromTxt = (EditText) findViewById(R.id.txt_FilterStartDate);
         dtFilterToTxt = (EditText) findViewById(R.id.txt_FilterEndDate);
         rptListView = (ListView) findViewById(R.id.listView);
+        btnFilter = (Button) findViewById(R.id.btn_filter);
+        btnFilter.setFocusable(true);
+        btnFilter.setFocusableInTouchMode(true);
+        btnFilter.requestFocus();
         foodDB = new DatabaseHelper(this);
 //        Log.i(TAG, "MS - Database Object Created.");
 
@@ -57,12 +62,6 @@ public class FoodReportActivity extends AppCompatActivity {
 
         // Date and Time Picker codes...
         dtFilterFromTxt.setInputType(InputType.TYPE_NULL);
-//        dtFilterFromTxt.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showDateDialog(dtFilterFromTxt);
-//            }
-//        });
         dtFilterFromTxt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -73,12 +72,6 @@ public class FoodReportActivity extends AppCompatActivity {
         });
 
         dtFilterToTxt.setInputType(InputType.TYPE_NULL);
-//        dtFilterToTxt.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                showDateDialog(dtFilterToTxt);
-//            }
-//        });
         dtFilterToTxt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
