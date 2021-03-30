@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * This class handles the SQLITE CRUD (create, update, delete) of our app
+ * This class handles the SQLITE CRUD (create, read, update, delete) of our app
  * @version 1.0
  * @since 18-March-2021
  */
@@ -108,19 +108,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(COL5, entry.getEntryDate());
         contentValues.put(COL6, entry.getComments());
 
-        String queryRecExist = "SELECT * FROM " + TABLE_NAME +
-                " WHERE " + COL1 + " = " + entry.getRecordID();
+        String queryRecExist = String.format("SELECT * FROM %s WHERE %s = %d", TABLE_NAME, COL1, entry.getRecordID());
         Cursor cursor = db.rawQuery(queryRecExist, null);
         if (cursor.getCount() == 1) {
 
             String arguments = String.valueOf(entry.getRecordID());
             long result = db.update(TABLE_NAME, contentValues,
                     "id=?", new String[]{arguments});
-            if (result == -1) {
-                return false;
-            } else {
-                return true;
-            }
+            return result != -1;
         } else {
             return false;
         }
@@ -136,15 +131,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      */
     public boolean deleteEntry(FoodEntry entry) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String queryString = "DELETE FROM " + TABLE_NAME + " WHERE " + COL1 + " = " + entry.getRecordID();
+        String queryString = String.format("DELETE FROM %s WHERE %s = %d", TABLE_NAME, COL1, entry.getRecordID());
 
         Cursor cursor = db.rawQuery(queryString, null);
 
-        if (cursor.moveToFirst()) {
-            return true;
-        } else {
-            return false;
-        }
+        return cursor.moveToFirst();
     }
 
 
@@ -156,8 +147,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      */
     public Cursor getAllData() {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
-        return res;
+        return db.rawQuery(String.format("SELECT * FROM %s", TABLE_NAME), null);
     }
 
 
@@ -168,9 +158,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      */
     public Cursor getCurrentData(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        String queryString = "SELECT * FROM " + TABLE_NAME + " WHERE " + COL1 + " = " + id + "";
-        Cursor res =  db.rawQuery( queryString, null );
-        return res;
+        String queryString = String.format("SELECT * FROM %s WHERE %s = %d", TABLE_NAME, COL1, id);
+        return db.rawQuery( queryString, null );
     }
 
 
@@ -180,11 +169,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @version 1.0 initial release
      * @since 26-March-2021
      */
-    public ArrayList<FoodEntry> getAllEntry() {
+    public ArrayList<FoodEntry> getAllEntries() {
 
         ArrayList<FoodEntry> returnList = new ArrayList<FoodEntry>();
 
-        String queryString = "SELECT * FROM " + TABLE_NAME;
+        String queryString = String.format("SELECT * FROM %s", TABLE_NAME);
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(queryString, null);
 
@@ -222,8 +211,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         ArrayList<FoodEntry> returnList = new ArrayList<FoodEntry>();
 
-        String queryString = "SELECT * FROM " + TABLE_NAME +
-                " WHERE " + COL5 + " BETWEEN '" + dtFrom + "' AND '" + dtTo + "'";
+        String queryString = String.format("SELECT * FROM %s WHERE %s BETWEEN '%s' AND '%s'", TABLE_NAME, COL5, dtFrom, dtTo);
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(queryString, null);
 
@@ -265,7 +253,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                               int qty, String fdate, String cmnts) {
         SQLiteDatabase db = this.getWritableDatabase();
         String arguments = String.valueOf(fid);
-        String queryString = "SELECT * FROM " + TABLE_NAME + " WHERE " + COL1 + " = ?";
+        String queryString = String.format("SELECT * FROM %s WHERE %s = ?", TABLE_NAME, COL1);
 
         ContentValues contentValues =  new ContentValues();
         contentValues.put("FOOD_TYPE", ftype);
@@ -276,16 +264,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         Cursor cursor = db.rawQuery(queryString, new String[]{arguments});
         if (cursor.getCount() > 0) {
-            long result = db.update(TABLE_NAME, contentValues,
+            int result = db.update(TABLE_NAME, contentValues,
                     "id=?", new String[]{arguments});
-            if (result == -1) {
-                return false;
-            } else {
-                return true;
-            }
-        } else {
-            return false;
-        }
+            return result != -1;
+        } else return false;
     }
 
 

@@ -38,26 +38,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        // Get shared preferences
-//        mPrefs = getPreferences(MODE_PRIVATE);
-//        prefsEditor = mPrefs.edit();
-//        UserSettings myGetUserSettings = getUserSettings();
-//        if (myGetUserSettings != null) {
-//            System.out.println("user name: " + myGetUserSettings.getName());
-//            System.out.println("email: " + myGetUserSettings.getEmail());
-//            System.out.println("send report?: " + myGetUserSettings.getSendReport());
-//            System.out.println("frequency: " + myGetUserSettings.getFrequency());
-//        } else {
-//            UserSettings us = new UserSettings();
-//            us.setName("Gabriel");
-//            us.setEmail("gabriel@example.com");
-//            us.setSendReport(false);
-//            System.out.println("user name: " + us.getName());
-//            System.out.println("email: " + us.getEmail());
-//            System.out.println("send report?: " + us.getSendReport());
-//            System.out.println("frequency: " + us.getFrequency());
-//        }
-
         // Set main background
         appBackground = findViewById(R.id.appbg);
         appBackground.setBackgroundResource(R.drawable.bg_blue);
@@ -91,33 +71,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-//    /**
-//     * Create a new object with the user setting values.
-//     * @author java-champs
-//     * @version 1.0
-//     * @return UserSettings object.
-//     */
-//    public UserSettings getUserSettings(){
-//        Gson gson = new Gson();
-//        String json = mPrefs.getString("UserSettings", "");
-//        UserSettings us = gson.fromJson(json, UserSettings.class);
-//        return us;
-//    }
-//
-//    /**
-//     * Save the user settings values.
-//     * @author java-champs
-//     * @version 1.0
-//     * @param us UserSettings object
-//     */
-//    public void saveUserSettings(UserSettings us){
-//        Gson gson = new Gson();
-//        String json = gson.toJson(us);
-//        prefsEditor.putString("UserSettings", json);
-//        prefsEditor.commit();
-//        Toast.makeText(getApplicationContext(), "User settings stored", Toast.LENGTH_SHORT).show();
-//    }
 }
 
 

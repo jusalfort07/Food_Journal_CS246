@@ -1,19 +1,14 @@
 package com.example.foodjournal;
 
 import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,11 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 import static java.util.Calendar.DAY_OF_MONTH;
-import static java.util.Calendar.HOUR_OF_DAY;
-import static java.util.Calendar.MINUTE;
 import static java.util.Calendar.MONTH;
 import static java.util.Calendar.YEAR;
 
@@ -55,7 +47,7 @@ public class FoodReportActivity extends AppCompatActivity {
         String dtFrom = dtFilterFromTxt.getText().toString();
         String dtTo = dtFilterToTxt.getText().toString();
         if (dtFrom.matches("") || dtTo.matches("")) {
-            theNewList = foodDB.getAllEntry();
+            theNewList = foodDB.getAllEntries();
         } else {
             theNewList = foodDB.getFilteredEntry(dtFrom, dtTo);
         }
@@ -103,13 +95,13 @@ public class FoodReportActivity extends AppCompatActivity {
                 String dtTo = dtFilterToTxt.getText().toString();
                 rptListView.setAdapter(null);
                 if (dtFrom.matches("") || dtTo.matches("")) {
-                    theNewList = foodDB.getAllEntry();
+                    theNewList = foodDB.getAllEntries();
                     Toast.makeText(FoodReportActivity.this, "No Filter Applied", Toast.LENGTH_SHORT).show();
                 } else {
                     theNewList.clear();
                     theNewList = foodDB.getFilteredEntry(dtFrom, dtTo);
                     int arrSize = theNewList.size();
-                    Toast.makeText(FoodReportActivity.this, "Filter result: " + arrSize, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FoodReportActivity.this, "Entries found: " + arrSize, Toast.LENGTH_SHORT).show();
                 }
                 rptListView.setAdapter(new FoodReportAdapter(FoodReportActivity.this, R.layout.adapter_food_report, theNewList));
             }
@@ -122,7 +114,7 @@ public class FoodReportActivity extends AppCompatActivity {
             public void onClick(View v) {
                 dtFilterFromTxt.setText("");
                 dtFilterToTxt.setText("");
-                theNewList = foodDB.getAllEntry();
+                theNewList = foodDB.getAllEntries();
                 rptListView.setAdapter(null);
                 rptListView.setAdapter(new FoodReportAdapter(FoodReportActivity.this, R.layout.adapter_food_report, theNewList));
                 Toast.makeText(FoodReportActivity.this, "Filter Cleared!", Toast.LENGTH_SHORT).show();

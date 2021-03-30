@@ -54,11 +54,7 @@ public class UserSettingsActivity extends AppCompatActivity {
             txtName.setText(myGetUserSettings.getName());
             txtEmail.setText(myGetUserSettings.getEmail());
 
-            if(myGetUserSettings.getSendReport() == true) {
-                chkSendRpt.setChecked(true);
-            } else {
-                chkSendRpt.setChecked(false);
-            }
+            chkSendRpt.setChecked(myGetUserSettings.getSendReport());
             if (myGetUserSettings.getFrequency().equals("Weekly")) {
                 optWeek.setChecked(true);
             }
@@ -79,11 +75,7 @@ public class UserSettingsActivity extends AppCompatActivity {
                 us.setName(txtName.getText().toString());
                 us.setEmail(txtEmail.getText().toString());
                 us.setFrequency(selectedFrequency.getText().toString());
-                if (chkSendRpt.isChecked()) {
-                    us.setSendReport(true);
-                } else {
-                    us.setSendReport(false);
-                }
+                us.setSendReport(chkSendRpt.isChecked());
                 saveUserSettings(us);
                 System.out.println(selectedFrequency.getText().toString());
                 Toast.makeText(UserSettingsActivity.this, "Settings Saved!", Toast.LENGTH_SHORT).show();
@@ -138,7 +130,6 @@ public class UserSettingsActivity extends AppCompatActivity {
         String json = gson.toJson(us);
         prefsEditor.putString("UserSettings", json);
         prefsEditor.commit();
-//        Toast.makeText(getApplicationContext(), "User settings stored", Toast.LENGTH_SHORT).show();
     }
 }
 

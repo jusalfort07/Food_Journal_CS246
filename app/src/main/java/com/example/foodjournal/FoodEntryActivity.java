@@ -185,12 +185,16 @@ public class FoodEntryActivity extends AppCompatActivity {
 
                     boolean isInserted = myDB.addEntry(entry);
                     if (isInserted) {
-                        Toast.makeText(FoodEntryActivity.this,"Entry Saved!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(FoodEntryActivity.this,
+                                "Entry Saved!",
+                                Toast.LENGTH_LONG).show();
 
                         // Clearing the form after successfully saving the data
                         clearForm((ViewGroup) findViewById(R.id.form_FoodEntry));
                     } else {
-                        Toast.makeText(FoodEntryActivity.this,"Entry NOT Saved!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(FoodEntryActivity.this,
+                                "Entry NOT Saved!",
+                                Toast.LENGTH_LONG).show();
                     }
                 }
             }
@@ -214,9 +218,7 @@ public class FoodEntryActivity extends AppCompatActivity {
                     Cursor res = myDB.getAllData();
                     if (res.getCount() == 0) {
                         showCustomMessage("Error", "Food Journal is empty!");
-                        return;
                     } else {
-
                         StringBuffer buffer = new StringBuffer();
                         while (res.moveToNext()) {
                             buffer.append("ID: " + res.getString(0) + "\n");
@@ -368,7 +370,6 @@ public class FoodEntryActivity extends AppCompatActivity {
                     if (isUpdated) {
                         Toast.makeText(FoodEntryActivity.this,"Entry Updated!", Toast.LENGTH_LONG).show();
                         startActivity(new Intent(FoodEntryActivity.this, FoodReportActivity.class));
-
                     } else {
                         Toast.makeText(FoodEntryActivity.this,"Entry NOT Updated!", Toast.LENGTH_LONG).show();
                     }
