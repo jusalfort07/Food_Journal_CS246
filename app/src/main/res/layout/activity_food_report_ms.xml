@@ -105,14 +105,7 @@
             android:textSize="16sp"
             android:textStyle="italic"
             android:layout_alignParentLeft="true"
-
-
             />
-
     </RelativeLayout>
-
-
-
-
 
 </RelativeLayout>

@@ -58,7 +58,6 @@
             android:elevation="9dp"
             android:layout_toRightOf="@id/lst_mid_info"
             android:layout_marginEnd="5dp"
-
             />
 
         <ImageButton
@@ -70,44 +69,7 @@
             android:elevation="9dp"
             android:layout_toRightOf="@id/lst_edit"
             android:layout_marginEnd="5dp"
-
             />
     </LinearLayout>
-<!--    <LinearLayout-->
-<!--        android:id="@+id/lst_btn_container"-->
-<!--        android:layout_width="60dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="vertical"-->
-<!--        android:layout_alignParentRight="true"-->
-<!--        android:layout_marginRight="5dp">-->
-
-<!--        <Button-->
-<!--            android:id="@+id/lst_edit1"-->
-<!--            android:layout_width="60dp"-->
-<!--            android:layout_height="30dp"-->
-<!--            android:text="EDIT"-->
-<!--            android:textAlignment="center"-->
-<!--            android:layout_weight="70"-->
-<!--            android:elevation="9dp"-->
-<!--            android:layout_marginBottom="0dp"-->
-<!--            android:paddingTop="1dp"-->
-<!--            android:paddingBottom="0dp"-->
-<!--            />-->
-<!--        <Button-->
-<!--            android:id="@+id/lst_delete1"-->
-<!--            android:textColor="@color/white"-->
-<!--            android:background="@color/red_del"-->
-<!--            android:layout_width="60dp"-->
-<!--            android:layout_height="22dp"-->
-<!--            android:text="DEL"-->
-<!--            android:textAlignment="center"-->
-<!--            android:layout_weight="70"-->
-<!--            android:elevation="9dp"-->
-<!--            android:layout_marginBottom="0dp"-->
-<!--            android:paddingTop="1dp"-->
-<!--            android:paddingBottom="0dp"-->
-
-<!--            />-->
-<!--    </LinearLayout>-->
 
 </RelativeLayout>
