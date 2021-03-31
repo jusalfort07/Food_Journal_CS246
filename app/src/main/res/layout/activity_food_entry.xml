@@ -54,7 +54,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:textColor="@color/black" />
+            android:textColor="@color/white"
+            android:textColorLink="#2196F3"/>
 
         <RadioButton
             android:id="@+id/idLiquid"
@@ -63,7 +64,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:textColor="@color/black" />
+            android:textColor="@color/white"
+            android:textColorLink="#2196F3" />
     </RadioGroup>
 
     <EditText
@@ -71,6 +73,7 @@
         android:ems="10"
         android:hint="@string/description"
         android:textColorHint="@color/gray_hint"
+        android:textColor="@color/white"
         android:inputType="text"
         android:autofillHints=""
 
@@ -87,6 +90,7 @@
         android:ems="10"
         android:hint="@string/quantity"
         android:textColorHint="@color/gray_hint"
+        android:textColor="@color/white"
         android:inputType="number"
         android:autofillHints=""
 
@@ -103,6 +107,7 @@
         android:ems="10"
         android:hint="@string/date"
         android:textColorHint="@color/gray_hint"
+        android:textColor="@color/white"
         android:inputType="none"
         android:autofillHints=""
 
@@ -119,6 +124,7 @@
         android:ems="10"
         android:hint="@string/comments"
         android:textColorHint="@color/gray_hint"
+        android:textColor="@color/white"
         android:inputType="textMultiLine"
         android:autofillHints=""
 
