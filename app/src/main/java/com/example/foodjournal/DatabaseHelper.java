@@ -5,11 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 /**
  * This class handles the SQLITE CRUD (create, read, update, delete) of our app
@@ -34,8 +30,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     /**
      * Method for creating the actual table for our food journal repository
      * @param db SQLiteDatabase
-     * @return n/a
-     * @version 1.0 initial release
      * @since 18-March-2021
      */
     @Override
@@ -55,8 +49,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @param db SQLiteDatabase
      * @param oldVersion integer not being used right now
      * @param newVersion integer not being used right now
-     * @return n/a
-     * @version 1.0 initial release
      * @since 18-March-2021
      */
     @Override
@@ -71,7 +63,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * Method for inserting record into the table for food journal entries
      * @param entry FoodEntry object
      * @return boolean - true if insert action was successful. false if an error occurred.
-     * @version 1.0 initial release
      * @since 18-March-2021
      */
     public boolean addEntry(FoodEntry entry) {
@@ -85,10 +76,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         long result = db.insert(TABLE_NAME, null, contentValues);
 
-        if (result == -1) {
-            return false;
-        }
-        return true;
+        return result != -1;
     }
 
 
@@ -96,7 +84,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * Method for inserting record into the table for food journal entries
      * @param entry FoodEntry object
      * @return boolean - true if insert action was successful. false if an error occurred.
-     * @version 1.0 initial release
      * @since 29-March-2021
      */
     public boolean updateEntry(FoodEntry entry) {
@@ -126,12 +113,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * Method to DELETE record from the table .
      * @return boolean - true if delete action was successful. false if an error occurred.
      * @param entry is a FoodEntry object
-     * @version 1.0 initial release
      * @since 26-March-2021
      */
     public boolean deleteEntry(FoodEntry entry) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String queryString = String.format("DELETE FROM %s WHERE %s = %d", TABLE_NAME, COL1, entry.getRecordID());
+        String queryString;
+        queryString = String.format("DELETE FROM %s WHERE %s = %d", TABLE_NAME, COL1, entry.getRecordID());
 
         Cursor cursor = db.rawQuery(queryString, null);
 
@@ -142,7 +129,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     /**
      * Method to get all the records from the table where food entries are stored.
      * @return res Cursor containing records of the given table
-     * @version 1.0 initial release
      * @since 18-March-2021
      */
     public Cursor getAllData() {
@@ -166,12 +152,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     /**
      * Method to get records from the table stored in a List of FoodEntry object.
      * @return returnList ArrayList containing records of the given table
-     * @version 1.0 initial release
      * @since 26-March-2021
      */
     public ArrayList<FoodEntry> getAllEntries() {
 
-        ArrayList<FoodEntry> returnList = new ArrayList<FoodEntry>();
+        ArrayList<FoodEntry> returnList = new ArrayList<>();
 
         String queryString = String.format("SELECT * FROM %s", TABLE_NAME);
         SQLiteDatabase db = this.getReadableDatabase();
@@ -204,12 +189,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     /**
      * Method to get records from the table stored in a List of FoodEntry object.
      * @return returnList ArrayList containing records of the given table
-     * @version 1.0 initial release
      * @since 26-March-2021
      */
     public ArrayList<FoodEntry> getFilteredEntry(String dtFrom, String dtTo) {
 
-        ArrayList<FoodEntry> returnList = new ArrayList<FoodEntry>();
+        ArrayList<FoodEntry> returnList = new ArrayList<>();
 
         String queryString = String.format("SELECT * FROM %s WHERE %s BETWEEN '%s' AND '%s'", TABLE_NAME, COL5, dtFrom, dtTo);
         SQLiteDatabase db = this.getReadableDatabase();

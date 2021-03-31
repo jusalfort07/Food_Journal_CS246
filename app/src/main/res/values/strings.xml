@@ -1,21 +1,25 @@
 <resources>
+    <!--Activity / Page Titles-->
     <string name="app_name">Food Journal</string>
     <string name="app_entry">Food Data Entry</string>
-    <string name="app_view">Food List View</string>
-    <string name="app_setting">App User Settings</string>
+    <string name="app_view">Journal View</string>
+    <string name="app_setting">User Settings</string>
+    <string name="app_credit">App Credits</string>
 
-    <string name="welcome">Welcome</string>
-    <string name="sub_title">to Food Journal</string>
-
-    <string name="btn_start">Start Entry</string>
-    <string name="btn_view">View Journal</string>
-    <string name="btn_settings">User Settings</string>
-    <string name="btn_back">Back to Main</string>
-
+    <!--Activity Instructions-->
     <string name="inst_1">Please click on any button to start using this application</string>
     <string name="inst_2">You may enter food or water consumption here</string>
     <string name="inst_3">You can view, edit or delete existing entry here</string>
     <string name="inst_4">Please enter user information and preferences here</string>
+
+    <!--Main Activity-->
+    <string name="welcome">Welcome</string>
+    <string name="sub_title">to Food Journal</string>
+    <string name="btn_start">Start Entry</string>
+    <string name="btn_view">View Journal</string>
+    <string name="btn_settings">User Settings</string>
+    <string name="btn_credits">Credits</string>
+    <string name="btn_back">Back to Main</string>
 
     <!--Food Data Entry-->
     <string name="type">Select an Entry Type:</string>
@@ -28,12 +32,40 @@
     <string name="cancel">Cancel</string>
     <string name="save">Save</string>
     <string name="view">View</string>
+
+    <!--Journal View-->
+    <string name="filter_start">Start Date</string>
+    <string name="filter_end">End Date</string>
+    <string name="btn_search">Search</string>
+    <string name="btn_delete">Clear</string>
+    <string name="lst_btn_edit">Edit</string>
+    <string name="lst_btn_delete">Del</string>
+    <string name="filter_inst">FILTERS:  Enter dates to select records or blank to see all</string>
+
+    <!--User Settings-->
     <string name="user_settings">User Settings</string>
     <string name="monthly">Monthly</string>
     <string name="weekly">Weekly</string>
-    <string name="frequency">Frequency</string>
+    <string name="frequency">Report Frequency</string>
     <string name="send_report_automatically">Send report automatically?</string>
     <string name="name">Name</string>
     <string name="email">Email</string>
 
+    <!--App Credit-->
+    <string name="creditTitle">About this</string>
+    <string name="devs">Developers:</string>
+    <string name="dev_name1">A. Michael Sierra</string>
+    <string name="dev_name2">Gabriel Canape</string>
+    <string name="dev_name3">Alfred Ortega</string>
+    <string name="dev_name4">Maximiliano Bustios</string>
+    <string name="dev_name5">Camila Cardus</string>
+    <string name="sponsor">Sponsor:</string>
+    <string name="sponsor_name">Anatolin Padilla</string>
+    <string name="desc">Description</string>
+    <string name="proj_desc">This project is part of the of
+        2021 Winter Semester CS246 course requirements
+        in BYU-Idaho. It will record meals and liquid intake on a
+        daily basis and be able to send a report via email. The target
+        users are all those who want to improve eating habits. </string>
+    <string name="app_ver">1.0</string>
 </resources>
