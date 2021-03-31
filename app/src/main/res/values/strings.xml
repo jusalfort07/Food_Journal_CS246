@@ -14,7 +14,7 @@
 
     <string name="inst_1">Please click on any button to start using this application</string>
     <string name="inst_2">You may enter food or water consumption here</string>
-    <string name="inst_3">You can view or edit existing entry here</string>
+    <string name="inst_3">You can view, edit or delete existing entry here</string>
     <string name="inst_4">Please enter user information and preferences here</string>
 
     <!--Food Data Entry-->
