@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class FoodReportAdapter extends ArrayAdapter<FoodEntry> {
 
     private final int layout;
-    private static final String TAG = "FoodReportAdapter";
+    private static final String TAG = "CS246 FoodReportAdapter";
     ArrayList<FoodEntry> dataList;
     FoodReportAdapter adapter;
 
@@ -26,7 +26,7 @@ public class FoodReportAdapter extends ArrayAdapter<FoodEntry> {
         dataList = data;
         layout = resource;
         this.adapter = this;
-        Log.i(TAG, "MS - MyListAdapter object created.");
+        Log.i(TAG, "MyListAdapter object created correctly");
     }
 
     @NonNull
@@ -52,6 +52,7 @@ public class FoodReportAdapter extends ArrayAdapter<FoodEntry> {
 //      Log.i(TAG, "MS - convertView.getTag Success");
 
         mainViewHolder.fEdit.setOnClickListener(v -> {
+            Log.d(TAG, "Editing record...");
             Intent foodEntryIntent = new Intent(getContext(), FoodEntryActivity.class);
             foodEntryIntent.putExtra("currentID", fids.getRecordID());
             foodEntryIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -59,6 +60,7 @@ public class FoodReportAdapter extends ArrayAdapter<FoodEntry> {
         });
 
         mainViewHolder.fDelete.setOnClickListener(v -> {
+                Log.d(TAG, "Deleting record...");
                 DatabaseHelper db = new DatabaseHelper(getContext());
                 db.deleteEntry(fids);
                 dataList.remove(position);

@@ -30,13 +30,13 @@ public class FoodReportActivity extends AppCompatActivity {
     Button btnFilter;
     ListView rptListView;
     ArrayList<FoodEntry> theNewList;
-    private static final String TAG = "FoodReportActivity";
+    private static final String TAG = "CS246 FoodReportActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_report);
-        Log.i(TAG, "MS - onCreate: Started.");
+        Log.i(TAG, "The food report activity has been loaded correctly");
 
         dtFilterFromTxt = (EditText) findViewById(R.id.txt_FilterStartDate);
         dtFilterToTxt = (EditText) findViewById(R.id.txt_FilterEndDate);
@@ -80,6 +80,7 @@ public class FoodReportActivity extends AppCompatActivity {
         // Set filter button
         Button btnFilter = (Button) findViewById(R.id.btn_filter);
         btnFilter.setOnClickListener(v -> {
+            Log.d(TAG, "Filtering records...");
             String dtFrom1 = dtFilterFromTxt.getText().toString();
             String dtTo1 = dtFilterToTxt.getText().toString();
             rptListView.setAdapter(null);
@@ -98,6 +99,7 @@ public class FoodReportActivity extends AppCompatActivity {
         // Set clear button
         Button btnClear = (Button) findViewById(R.id.btn_clearfilter);
         btnClear.setOnClickListener(v -> {
+            Log.d(TAG, "Clearing filter...");
             dtFilterFromTxt.setText("");
             dtFilterToTxt.setText("");
             theNewList = foodDB.getAllEntries();

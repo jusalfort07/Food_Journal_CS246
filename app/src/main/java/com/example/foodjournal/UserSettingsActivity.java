@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -25,6 +26,7 @@ public class UserSettingsActivity extends AppCompatActivity {
     RadioButton optWeek, optMonth, selectedFrequency;
     RadioGroup grpFrequency;
     Button btnSave;
+    private static final String TAG = "CS246 UserSettingsAct";
 
     // Shared preferences
     SharedPreferences mPrefs;
@@ -36,6 +38,7 @@ public class UserSettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_settings);
+        Log.d(TAG, "The user settings activity has been loaded correctly");
 
         // Get shared preferences
         mPrefs = getPreferences(MODE_PRIVATE);
@@ -68,6 +71,7 @@ public class UserSettingsActivity extends AppCompatActivity {
         // Set save button
         btnSave = (Button) findViewById(R.id.save);
         btnSave.setOnClickListener((View.OnClickListener) v -> {
+            Log.d(TAG, "Saving user settings...");
             int selectedOption = grpFrequency.getCheckedRadioButtonId();
             selectedFrequency = (RadioButton) findViewById(selectedOption);
 

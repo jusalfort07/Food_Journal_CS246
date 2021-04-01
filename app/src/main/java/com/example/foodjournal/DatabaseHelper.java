@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
 import java.util.ArrayList;
 
 /**
@@ -13,7 +15,7 @@ import java.util.ArrayList;
  * @since 18-March-2021
  */
 public class DatabaseHelper extends SQLiteOpenHelper {
-
+    private static final String TAG = "CS246 DatabaseHelper";
     public static final String DATABASE_NAME = "FoodJournal_CS246.db";
     public static final String TABLE_NAME = "food_entry";
     public static final String COL1 = "ID";
@@ -34,6 +36,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
+        Log.d(TAG,"Creating a table");
         String createTable = "CREATE TABLE " + TABLE_NAME +
                 " (ID INTEGER PRIMARY KEY AUTOINCREMENT," +
                 "  FOOD_TYPE TEXT, FOOD_DESCRIPTION TEXT, FOOD_QUANTITY INTEGER, " +
@@ -66,6 +69,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @since 18-March-2021
      */
     public boolean addEntry(FoodEntry entry) {
+        Log.d(TAG, "Adding a entry at the table database...");
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL2, entry.getFoodType());
@@ -87,6 +91,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @since 29-March-2021
      */
     public boolean updateEntry(FoodEntry entry) {
+        Log.d(TAG, "Updating record from the table...");
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL2, entry.getFoodType());
@@ -116,6 +121,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @since 26-March-2021
      */
     public boolean deleteEntry(FoodEntry entry) {
+        Log.d(TAG, "Deleting record from the table...");
         SQLiteDatabase db = this.getWritableDatabase();
         String queryString;
         queryString = String.format("DELETE FROM %s WHERE %s = %d", TABLE_NAME, COL1, entry.getRecordID());
@@ -132,6 +138,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @since 18-March-2021
      */
     public Cursor getAllData() {
+        Log.d(TAG, "Getting all the record from the table database");
         SQLiteDatabase db = this.getWritableDatabase();
         return db.rawQuery(String.format("SELECT * FROM %s", TABLE_NAME), null);
     }

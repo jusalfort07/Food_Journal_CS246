@@ -2,6 +2,7 @@ package com.example.foodjournal;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
  */
 public class MainActivity extends AppCompatActivity {
 
-    //private static final String TAG = "MainActivity";
+    private static final String TAG = "CS246 MainActivity";
     Button btnStart, btnView, btnSettings, btnCredit;
     View appBackground;
 
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Log.d(TAG, "The main activity has been loaded correctly");
 
         // Set main background
         appBackground = findViewById(R.id.appbg);
@@ -39,17 +41,42 @@ public class MainActivity extends AppCompatActivity {
         btnCredit = findViewById(R.id.btn_credit);
 
         //When click the start button, call a new activity to type a food entry
-        btnStart.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, FoodEntryActivity.class)));
+        btnStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, FoodEntryActivity.class));
+                Log.d(TAG, "The user clicked the start entry button...");
+            }
+        });
 
         //When click the View button, call a new activity to see the report with all the food you record.
-        btnView.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, FoodReportActivity.class)));
+        btnView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, FoodReportActivity.class));
+                Log.d(TAG, "The user clicked the view journal button...");
+            }
+        });
 
         //When click the Settings button, call a new activity to config the user settings
-        btnSettings.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, UserSettingsActivity.class)));
+        btnSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, UserSettingsActivity.class));
+                Log.d(TAG, "The user clicked the user settings button...");
+            }
+        });
 
-        //When click the Settings button, call a new activity to config the user settings
-        btnCredit.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, CreditActivity.class)));
+        //When click the credits button, call a new activity to show the credits
+        btnCredit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, CreditActivity.class));
+                Log.d(TAG, "The user clicked the credit activity...");
+            }
+        });
     }
+
 }
 
 
