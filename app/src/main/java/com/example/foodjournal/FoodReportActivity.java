@@ -30,13 +30,12 @@ public class FoodReportActivity extends AppCompatActivity {
     Button btnFilter;
     ListView rptListView;
     ArrayList<FoodEntry> theNewList;
-    private static final String TAG = "CS246 FoodReportActivity";
+    private static final String TAG = "CS246 FoodReportAct";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_food_report);
-        Log.i(TAG, "The food report activity has been loaded correctly");
 
         dtFilterFromTxt = (EditText) findViewById(R.id.txt_FilterStartDate);
         dtFilterToTxt = (EditText) findViewById(R.id.txt_FilterEndDate);

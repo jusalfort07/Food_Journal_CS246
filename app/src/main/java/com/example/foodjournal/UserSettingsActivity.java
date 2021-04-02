@@ -38,7 +38,6 @@ public class UserSettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_settings);
-        Log.d(TAG, "The user settings activity has been loaded correctly");
 
         // Get shared preferences
         mPrefs = getPreferences(MODE_PRIVATE);

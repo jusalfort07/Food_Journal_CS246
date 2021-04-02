@@ -11,7 +11,6 @@ import android.util.Log;
  */
 public class FoodEntry {
 
-    private static final String TAG = "CS246 FoodEntryClass";
     // Member variables
     String foodType;
     String description;
@@ -38,7 +37,6 @@ public class FoodEntry {
      * @since 18-March-2021
      */
     public String getFoodType() {
-        Log.d(TAG, "Getting food type...");
         return foodType;
     }
     /**
@@ -47,7 +45,6 @@ public class FoodEntry {
      * @since 18-March-2021
      */
     public String getDescription() {
-        Log.d(TAG, "Getting description...");
         return description;
     }
     /**
@@ -56,7 +53,6 @@ public class FoodEntry {
      * @since 18-March-2021
      */
     public Integer getQuantity() {
-        Log.d(TAG, "Getting quantity...");
         return quantity;
     }
     /**
@@ -65,7 +61,6 @@ public class FoodEntry {
      * @since 18-March-2021
      */
     public String getEntryDate() {
-        Log.d(TAG, "Getting entry date...");
         return entryDate;
     }
     /**
@@ -74,7 +69,6 @@ public class FoodEntry {
      * @since 18-March-2021
      */
     public String getComments() {
-        Log.d(TAG, "Getting comments...");
         return comments;
     }
 
@@ -84,7 +78,6 @@ public class FoodEntry {
      * @since 26-March-2021
      */
     public Integer getRecordID() {
-        Log.d(TAG, "Getting record ID...");
         return recordID;
     }
 
@@ -94,7 +87,6 @@ public class FoodEntry {
      * @since 18-March-2021
      */
     public void setDescription(String description) {
-        Log.d(TAG, "Setting description...");
         this.description = description;
     }
     /**
@@ -103,7 +95,6 @@ public class FoodEntry {
      * @since 18-March-2021
      */
     public void setQuantity(Integer quantity) {
-        Log.d(TAG, "Setting quantity...");
         this.quantity = quantity;
     }
     /**
@@ -112,7 +103,6 @@ public class FoodEntry {
      * @since 18-March-2021
      */
     public void setEntryDate(String entryDate) {
-        Log.d(TAG, "Setting entry date...");
         this.entryDate = entryDate;
     }
     /**
@@ -121,7 +111,6 @@ public class FoodEntry {
      * @since 18-March-2021
      */
     public void setComments(String comments) {
-        Log.d(TAG, "Setting comments...");
         this.comments = comments;
     }
     /**
@@ -130,7 +119,6 @@ public class FoodEntry {
      * @since 18-March-2021
      */
     public void setFoodType(String foodType) {
-        Log.d(TAG, "Setting food type...");
         this.foodType = foodType;
     }
 
@@ -140,7 +128,6 @@ public class FoodEntry {
      * @since 26-March-2021
      */
     public void setRecordID(Integer recID) {
-        Log.d(TAG, "Setting record ID...");
         this.recordID = recID;
     }
 }

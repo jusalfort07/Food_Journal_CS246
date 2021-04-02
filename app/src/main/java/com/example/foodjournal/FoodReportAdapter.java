@@ -26,7 +26,6 @@ public class FoodReportAdapter extends ArrayAdapter<FoodEntry> {
         dataList = data;
         layout = resource;
         this.adapter = this;
-        Log.i(TAG, "MyListAdapter object created correctly");
     }
 
     @NonNull

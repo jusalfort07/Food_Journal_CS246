@@ -13,13 +13,11 @@ public class CreditActivity extends AppCompatActivity {
     // Activity variables
     View appBackground5;
     Button btnReturn5;
-    private static final String TAG = "CS246 CreditActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_credit);
-        Log.d(TAG, "The credit activity has been loaded correctly");
 
 
         // Set background

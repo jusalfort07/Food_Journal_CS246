@@ -44,8 +44,6 @@ public class FoodEntryActivity extends AppCompatActivity {
     RadioButton solidType, liquidType, selectedFoodType;
     Button btnSave, btnView, btnReturn2;
     Integer currentRecordID;
-    private static final String TAG = "CS246 FoodEntryActivity";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,7 +140,6 @@ public class FoodEntryActivity extends AppCompatActivity {
         if (viewAlternative.equals("YES")) {
             viewData();
         }
-        Log.d(TAG, "The food entry activity has been loaded correctly");
     }
 
 
@@ -156,7 +153,6 @@ public class FoodEntryActivity extends AppCompatActivity {
     public void addData() {
         btnSave.setOnClickListener(
                 (View.OnClickListener) v -> {
-                    Log.d(TAG, "Saving entry...");
                     int selectedID = foodType.getCheckedRadioButtonId();
                     selectedFoodType = (RadioButton) findViewById(selectedID);
 
@@ -196,7 +192,6 @@ public class FoodEntryActivity extends AppCompatActivity {
     public void viewData() {
         btnView.setOnClickListener(
                 v -> {
-                    Log.d(TAG, "The user clicked the view button...");
                     Cursor res = myDB.getAllData();
                     if (res.getCount() == 0) {
                         showCustomMessage("Error", "Food Journal is empty!");

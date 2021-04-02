@@ -15,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
  */
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = "CS246 MainActivity";
     Button btnStart, btnView, btnSettings, btnCredit;
     View appBackground;
 
@@ -28,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.d(TAG, "The main activity has been loaded correctly");
 
         // Set main background
         appBackground = findViewById(R.id.appbg);
@@ -45,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, FoodEntryActivity.class));
-                Log.d(TAG, "The user clicked the start entry button...");
             }
         });
 
@@ -54,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, FoodReportActivity.class));
-                Log.d(TAG, "The user clicked the view journal button...");
             }
         });
 
@@ -63,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, UserSettingsActivity.class));
-                Log.d(TAG, "The user clicked the user settings button...");
             }
         });
 
@@ -72,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, CreditActivity.class));
-                Log.d(TAG, "The user clicked the credit activity...");
             }
         });
     }
