@@ -10,11 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".CreditActivity"
-            android:label="@string/app_credit" />
-        <activity
             android:name=".UserSettingsActivity"
-            android:label="@string/app_setting" />
+            android:label="@string/app_setting"></activity>
         <activity
             android:name=".FoodReportActivity"
             android:label="@string/app_view" />

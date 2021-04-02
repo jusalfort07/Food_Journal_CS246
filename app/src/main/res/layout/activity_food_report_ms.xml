@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_food_report_ms"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FoodReportActivity"
+    android:background="@drawable/bg_blue">
+
+
+    <EditText
+        android:id="@+id/txt_FilterStartDate"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Start Date"
+        android:gravity="center"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:textAlignment="center"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        />
+
+    <EditText
+        android:id="@+id/txt_FilterEndDate"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="End Date"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:textAlignment="center"
+        android:layout_toEndOf="@id/txt_FilterStartDate"
+        />
+
+    <Button
+        android:id="@+id/btn_filter"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:elevation="9dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/btn_ltblue"
+        android:text="Search"
+        android:textColor="@color/white"
+        android:layout_toEndOf="@id/txt_FilterEndDate"/>
+
+    <Button
+        android:id="@+id/btn_clearfilter"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:elevation="9dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/btn_ltgray"
+        android:text="x"
+        android:textColor="@color/white"
+        android:layout_toEndOf="@id/btn_filter"/>
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/bottomArea"
+        android:layout_below="@id/txt_FilterStartDate"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        />
+
+    <RelativeLayout android:id="@+id/bottomArea"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        <!-- content here -->
+        <Button
+            android:id="@+id/btn_return3"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/btn_ltblue"
+            android:elevation="9dp"
+            android:text="@string/btn_back"
+            android:textColor="@color/white"
+            android:layout_alignParentRight="true"
+            android:layout_toEndOf="@id/txt_instruct3"
+            />
+
+        <TextView
+            android:id="@+id/txt_instruct3"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="@string/inst_3"
+            android:textAlignment="center"
+            android:textColor="@color/gray_inst"
+            android:textSize="16sp"
+            android:textStyle="italic"
+            android:layout_alignParentLeft="true"
+            />
+    </RelativeLayout>
+
+</RelativeLayout>
