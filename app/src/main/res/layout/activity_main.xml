@@ -92,6 +92,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_view" />
 
+    <Button
+        android:id="@+id/btn_credit"
+        android:background="@drawable/btn_ltblue"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:elevation="9dp"
+        android:text="@string/btn_credits"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_settings" />
+
     <TextView
         android:id="@+id/txt_instruct1"
         android:layout_width="wrap_content"

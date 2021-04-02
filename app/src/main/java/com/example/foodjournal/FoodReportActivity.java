@@ -1,12 +1,13 @@
 package com.example.foodjournal;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -29,14 +30,12 @@ public class FoodReportActivity extends AppCompatActivity {
     Button btnFilter;
     ListView rptListView;
     ArrayList<FoodEntry> theNewList;
-    FoodReportAdapter rAdapter;
-    private static final String TAG = "FoodReportActivity";
+    private static final String TAG = "CS246 FoodReportAct";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_food_report_ms);
-//        Log.i(TAG, "MS - onCreate: Started.");
+        setContentView(R.layout.activity_food_report);
 
         dtFilterFromTxt = (EditText) findViewById(R.id.txt_FilterStartDate);
         dtFilterToTxt = (EditText) findViewById(R.id.txt_FilterEndDate);
@@ -46,9 +45,9 @@ public class FoodReportActivity extends AppCompatActivity {
         btnFilter.setFocusableInTouchMode(true);
         btnFilter.requestFocus();
         foodDB = new DatabaseHelper(this);
-//        Log.i(TAG, "MS - Database Object Created.");
+        Log.i(TAG, "MS - Database Object Created.");
 
-        theNewList = new ArrayList<FoodEntry>();
+        theNewList = new ArrayList<>();
         String dtFrom = dtFilterFromTxt.getText().toString();
         String dtTo = dtFilterToTxt.getText().toString();
         if (dtFrom.matches("") || dtTo.matches("")) {
@@ -62,66 +61,58 @@ public class FoodReportActivity extends AppCompatActivity {
 
         // Date and Time Picker codes...
         dtFilterFromTxt.setInputType(InputType.TYPE_NULL);
-        dtFilterFromTxt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    showDateDialog(dtFilterFromTxt);
-                }
+        dtFilterFromTxt.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                showDateDialog(dtFilterFromTxt);
+                dtFilterFromTxt.setOnClickListener(v1 -> showDateDialog(dtFilterFromTxt));
             }
         });
 
         dtFilterToTxt.setInputType(InputType.TYPE_NULL);
-        dtFilterToTxt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
+        dtFilterToTxt.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
                 showDateDialog(dtFilterToTxt);
+                dtFilterToTxt.setOnClickListener(v1 -> showDateDialog(dtFilterToTxt));
             }
         });
 
         // Set filter button
         Button btnFilter = (Button) findViewById(R.id.btn_filter);
-        btnFilter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String dtFrom = dtFilterFromTxt.getText().toString();
-                String dtTo = dtFilterToTxt.getText().toString();
-                rptListView.setAdapter(null);
-                if (dtFrom.matches("") || dtTo.matches("")) {
-                    theNewList = foodDB.getAllEntries();
-                    Toast.makeText(FoodReportActivity.this, "No Filter Applied", Toast.LENGTH_SHORT).show();
-                } else {
-                    theNewList.clear();
-                    theNewList = foodDB.getFilteredEntry(dtFrom, dtTo);
-                    int arrSize = theNewList.size();
-                    Toast.makeText(FoodReportActivity.this, "Entries found: " + arrSize, Toast.LENGTH_SHORT).show();
-                }
-                rptListView.setAdapter(new FoodReportAdapter(FoodReportActivity.this, R.layout.adapter_food_report, theNewList));
+        btnFilter.setOnClickListener(v -> {
+            Log.d(TAG, "Filtering records...");
+            String dtFrom1 = dtFilterFromTxt.getText().toString();
+            String dtTo1 = dtFilterToTxt.getText().toString();
+            rptListView.setAdapter(null);
+            if (dtFrom1.matches("") || dtTo1.matches("")) {
+                theNewList = foodDB.getAllEntries();
+                Toast.makeText(FoodReportActivity.this, "No Filter Applied", Toast.LENGTH_SHORT).show();
+            } else {
+                theNewList.clear();
+                theNewList = foodDB.getFilteredEntry(dtFrom1, dtTo1);
+                int arrSize = theNewList.size();
+                Toast.makeText(FoodReportActivity.this, ""+arrSize+" Entries found: ", Toast.LENGTH_SHORT).show();
             }
+            rptListView.setAdapter(new FoodReportAdapter(FoodReportActivity.this, R.layout.adapter_food_report, theNewList));
         });
 
         // Set clear button
         Button btnClear = (Button) findViewById(R.id.btn_clearfilter);
-        btnClear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dtFilterFromTxt.setText("");
-                dtFilterToTxt.setText("");
-                theNewList = foodDB.getAllEntries();
-                rptListView.setAdapter(null);
-                rptListView.setAdapter(new FoodReportAdapter(FoodReportActivity.this, R.layout.adapter_food_report, theNewList));
-                Toast.makeText(FoodReportActivity.this, "Filter Cleared!", Toast.LENGTH_SHORT).show();
-            }
+        btnClear.setOnClickListener(v -> {
+            Log.d(TAG, "Clearing filter...");
+            dtFilterFromTxt.setText("");
+            dtFilterToTxt.setText("");
+            theNewList = foodDB.getAllEntries();
+            rptListView.setAdapter(null);
+            rptListView.setAdapter(new FoodReportAdapter(FoodReportActivity.this, R.layout.adapter_food_report, theNewList));
+            Toast.makeText(FoodReportActivity.this, "Filter Cleared!", Toast.LENGTH_SHORT).show();
         });
 
         // Set return button
         Button btnReturn3 = (Button) findViewById(R.id.btn_return3);
-        btnReturn3.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            }
+        btnReturn3.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
         });
     }
 
@@ -130,22 +121,18 @@ public class FoodReportActivity extends AppCompatActivity {
      * Method which shows the system calendar and time selection windows for
      * entering the date and time when the food/liquid is taken by the user.
      * @param date_entry field where date and time is on the page
-     * @version 1.0 initial release
      * @since 18-March-2021
      */
     private void showDateDialog(final EditText date_entry) {
         final Calendar calendar = Calendar.getInstance();
 
-        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                calendar.set(Calendar.YEAR, year);
-                calendar.set(Calendar.MONTH, month);
-                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        DatePickerDialog.OnDateSetListener dateSetListener = (view, year, month, dayOfMonth) -> {
+            calendar.set(Calendar.YEAR, year);
+            calendar.set(Calendar.MONTH, month);
+            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                date_entry.setText(simpleDateFormat.format(calendar.getTime()));
-            }
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            date_entry.setText(simpleDateFormat.format(calendar.getTime()));
         };
 
         new DatePickerDialog(this, dateSetListener,

@@ -2,6 +2,7 @@ package com.example.foodjournal;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -15,11 +16,9 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
@@ -46,7 +45,6 @@ public class FoodEntryActivity extends AppCompatActivity {
     Button btnSave, btnView, btnReturn2;
     Integer currentRecordID;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +63,7 @@ public class FoodEntryActivity extends AppCompatActivity {
         foodCommentsTxt = (EditText) findViewById(R.id.txt_Comments);
 
         foodType = (RadioGroup) findViewById(R.id.idRadioGroup);
-        //foodType.check(R.id.idSolid);
+        foodType.check(R.id.idSolid);
         solidType = (RadioButton) findViewById(R.id.idSolid);
         liquidType = (RadioButton) findViewById(R.id.idLiquid);
 
@@ -76,6 +74,25 @@ public class FoodEntryActivity extends AppCompatActivity {
         foodDescTxt.addTextChangedListener(formTextWatcher);
         foodQtyTxt.addTextChangedListener(formTextWatcher);
         dtIntakeTxt.addTextChangedListener(formTextWatcher);
+
+        // Date and Time Picker codes...
+        dtIntakeTxt.setInputType(InputType.TYPE_NULL);
+        dtIntakeTxt.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                showDateTimeDialog(dtIntakeTxt);
+                dtIntakeTxt.setOnClickListener(v1 -> showDateTimeDialog(dtIntakeTxt));
+            }
+        });
+
+        // Set the "View" button to show the FoodReportActivity
+        btnView.setOnClickListener(v -> startActivity(new Intent(FoodEntryActivity.this, FoodReportActivity.class)));
+
+        // Set "Return to Main" button
+        btnReturn2.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+        });
 
         Bundle extras = getIntent().getExtras();
         if(extras != null) {
@@ -99,7 +116,6 @@ public class FoodEntryActivity extends AppCompatActivity {
 
                 if (ftype.equals("Solid")) {
                     solidType.setChecked(true);
-
                 }
                 if (ftype.equals("Liquid")) {
                     liquidType.setChecked(true);
@@ -113,43 +129,17 @@ public class FoodEntryActivity extends AppCompatActivity {
                 updateData(currentRecordID);
             }
         } else {
-
             // If current ID is blank then call the addData method instead
             addData();
         }
 
         // The viewData() method is only used for testing purposes.
         // It will show the current records using a custom message.
-        // viewData();
-
-        // Set the "View" button to show the FoodReportActivity
-        btnView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(FoodEntryActivity.this, FoodReportActivity.class));
-            }
-        });
-
-        // Set "Return to Main" button
-        btnReturn2.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            }
-        });
-
-        // Date and Time Picker codes...
-        dtIntakeTxt.setInputType(InputType.TYPE_NULL);
-        dtIntakeTxt.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    showDateTimeDialog(dtIntakeTxt);
-                }
-            }
-        });
+        String viewAlternative;
+        viewAlternative = "NO";
+        if (viewAlternative.equals("YES")) {
+            viewData();
+        }
     }
 
 
@@ -158,15 +148,11 @@ public class FoodEntryActivity extends AppCompatActivity {
      * This method is triggered when the user clicked on the Save button.
      * This will use the FoodEntry class and will inform user of the outcome
      * using the Toast (message screen).
-     * @version 1.0 initial release
      * @since 18-March-2021
      */
     public void addData() {
         btnSave.setOnClickListener(
-            new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
+                (View.OnClickListener) v -> {
                     int selectedID = foodType.getCheckedRadioButtonId();
                     selectedFoodType = (RadioButton) findViewById(selectedID);
 
@@ -181,17 +167,17 @@ public class FoodEntryActivity extends AppCompatActivity {
                     if (isInserted) {
                         Toast.makeText(FoodEntryActivity.this,
                                 "Entry Saved!",
-                                Toast.LENGTH_LONG).show();
+                                Toast.LENGTH_SHORT).show();
 
                         // Clearing the form after successfully saving the data
                         clearForm((ViewGroup) findViewById(R.id.form_FoodEntry));
+                        foodType.check(R.id.idSolid);
                     } else {
                         Toast.makeText(FoodEntryActivity.this,
                                 "Entry NOT Saved!",
-                                Toast.LENGTH_LONG).show();
+                                Toast.LENGTH_SHORT).show();
                     }
                 }
-            }
         );
     }
 
@@ -201,32 +187,28 @@ public class FoodEntryActivity extends AppCompatActivity {
      * This will show records on the fly and is only used to ensure that records
      * are being inserted into the database. This will be replaced once the report
      * activity is functioning.
-     * @version 1.0 initial release
      * @since 18-March-2021
      */
     public void viewData() {
         btnView.setOnClickListener(
-            new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+                v -> {
                     Cursor res = myDB.getAllData();
                     if (res.getCount() == 0) {
                         showCustomMessage("Error", "Food Journal is empty!");
                     } else {
-                        StringBuffer buffer = new StringBuffer();
+                        StringBuilder buffer = new StringBuilder();
                         while (res.moveToNext()) {
-                            buffer.append("ID: " + res.getString(0) + "\n");
-                            buffer.append("TYPE: " + res.getString(1) + "\n");
-                            buffer.append("DESC: " + res.getString(2) + "\n");
-                            buffer.append("QTY: " + res.getString(3) + "\n");
-                            buffer.append("DATE: " + res.getString(4) + "\n");
-                            buffer.append("COMMENTS: " + res.getString(5) + "\n\n");
+                            buffer.append("ID: ").append(res.getString(0)).append("\n");
+                            buffer.append("TYPE: ").append(res.getString(1)).append("\n");
+                            buffer.append("DESC: ").append(res.getString(2)).append("\n");
+                            buffer.append("QTY: ").append(res.getString(3)).append("\n");
+                            buffer.append("DATE: ").append(res.getString(4)).append("\n");
+                            buffer.append("COMMENTS: ").append(res.getString(5)).append("\n\n");
                         }
                         // Show all data
                         showCustomMessage("Food Journal", buffer.toString());
                     }
                 }
-            }
         );
     }
 
@@ -236,7 +218,6 @@ public class FoodEntryActivity extends AppCompatActivity {
      * This can also be used for other messages needed within this app.
      * @param title string used as title of the custom window
      * @param msg string information that will be displayed inside the custom window
-     * @version 1.0 initial release
      * @since 18-March-2021
      */
     public void showCustomMessage(String title, String msg) {
@@ -252,34 +233,27 @@ public class FoodEntryActivity extends AppCompatActivity {
      * Method which shows the system calendar and time selection windows for
      * entering the date and time when the food/liquid is taken by the user.
      * @param date_time_entry field where date and time is on the page
-     * @version 1.0 initial release
      * @since 18-March-2021
      */
     private void showDateTimeDialog(final EditText date_time_entry) {
         final Calendar calendar = Calendar.getInstance();
 
-        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                calendar.set(Calendar.YEAR, year);
-                calendar.set(Calendar.MONTH, month);
-                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        DatePickerDialog.OnDateSetListener dateSetListener = (view, year, month, dayOfMonth) -> {
+            calendar.set(Calendar.YEAR, year);
+            calendar.set(Calendar.MONTH, month);
+            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
-                TimePickerDialog.OnTimeSetListener timeSetListener = new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
-                        calendar.set(Calendar.MINUTE, minute);
+            TimePickerDialog.OnTimeSetListener timeSetListener = (view1, hourOfDay, minute) -> {
+                calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                calendar.set(Calendar.MINUTE, minute);
 
-                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                        date_time_entry.setText(simpleDateFormat.format(calendar.getTime()));
-                    }
-                };
-                new TimePickerDialog(FoodEntryActivity.this,timeSetListener,
-                        calendar.get(HOUR_OF_DAY),
-                        calendar.get(MINUTE),
-                        false).show();
-            }
+                @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                date_time_entry.setText(simpleDateFormat.format(calendar.getTime()));
+            };
+            new TimePickerDialog(FoodEntryActivity.this,timeSetListener,
+                    calendar.get(HOUR_OF_DAY),
+                    calendar.get(MINUTE),
+                    false).show();
         };
 
         new DatePickerDialog(this, dateSetListener,
@@ -292,7 +266,6 @@ public class FoodEntryActivity extends AppCompatActivity {
     /**
      * Method used to reset all input fields on the Food Entry form of the app
      * @param group view group object or name to be cleared
-     * @version 1.0 initial release
      * @since 18-March-2021
      */
     private void clearForm(ViewGroup group) {
@@ -316,7 +289,7 @@ public class FoodEntryActivity extends AppCompatActivity {
      * 2. Quantity
      * 3. Date when the food was taken
      */
-    private TextWatcher formTextWatcher = new TextWatcher() {
+    private final TextWatcher formTextWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
         }
@@ -339,14 +312,11 @@ public class FoodEntryActivity extends AppCompatActivity {
      * This method is triggered when the user clicked on the Save button.
      * This will use the FoodEntry class and will inform user of the outcome
      * using the Toast (message screen).
-     * @version 1.0 initial release
      * @since 18-March-2021
      */
     public void updateData(int recID) {
         btnSave.setOnClickListener(
-            new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+                (View.OnClickListener) v -> {
 
                     int selectedID = foodType.getCheckedRadioButtonId();
                     selectedFoodType = (RadioButton) findViewById(selectedID);
@@ -367,7 +337,6 @@ public class FoodEntryActivity extends AppCompatActivity {
                         Toast.makeText(FoodEntryActivity.this,"Entry NOT Updated!", Toast.LENGTH_LONG).show();
                     }
                 }
-            }
         );
     }
 }

@@ -1,17 +1,16 @@
 package com.example.foodjournal;
 
-import java.util.Calendar;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+
+import android.util.Log;
 
 /**
  * Class which handles the entering of records from the fields into the database.
  * @version 1.0 initial release
  * @version 1.1 added recordID variable, setter and getter.
  * @since 18-March-2021
- * @updated 26-March-2021
  */
 public class FoodEntry {
+
     // Member variables
     String foodType;
     String description;
@@ -20,12 +19,8 @@ public class FoodEntry {
     String comments;
     Integer recordID;
 
-    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    Calendar cal = Calendar.getInstance();
-
     /**
      * Default constructor without any parameters nor return
-     * @version 1.0 initial release
      * @since 18-March-2021
      */
     public FoodEntry() {
@@ -39,7 +34,6 @@ public class FoodEntry {
     /**
      * Method for getting the value of a class variable
      * @return foodType value
-     * @version 1.0 initial release
      * @since 18-March-2021
      */
     public String getFoodType() {
@@ -48,7 +42,6 @@ public class FoodEntry {
     /**
      * Method for getting the value of a class variable
      * @return description value
-     * @version 1.0 initial release
      * @since 18-March-2021
      */
     public String getDescription() {
@@ -57,7 +50,6 @@ public class FoodEntry {
     /**
      * Method for getting the value of a class variable
      * @return quantity value
-     * @version 1.0 initial release
      * @since 18-March-2021
      */
     public Integer getQuantity() {
@@ -66,7 +58,6 @@ public class FoodEntry {
     /**
      * Method for getting the value of the class variable
      * @return entryDate value
-     * @version 1.0 initial release
      * @since 18-March-2021
      */
     public String getEntryDate() {
@@ -75,7 +66,6 @@ public class FoodEntry {
     /**
      * Method for getting the value of the class variable
      * @return comments value
-     * @version 1.0 initial release
      * @since 18-March-2021
      */
     public String getComments() {
@@ -85,7 +75,6 @@ public class FoodEntry {
     /**
      * Method for getting the value of the class variable
      * @return recordID integer value
-     * @version 1.0 initial release
      * @since 26-March-2021
      */
     public Integer getRecordID() {
@@ -95,7 +84,6 @@ public class FoodEntry {
     /**
      * Method for setting a class variable value
      * @param description string describing the food/liquid intake
-     * @version 1.0 initial release
      * @since 18-March-2021
      */
     public void setDescription(String description) {
@@ -104,7 +92,6 @@ public class FoodEntry {
     /**
      * Method for setting a class variable value
      * @param quantity integer for the amount of food/liquid intake
-     * @version 1.0 initial release
      * @since 18-March-2021
      */
     public void setQuantity(Integer quantity) {
@@ -113,7 +100,6 @@ public class FoodEntry {
     /**
      * Method for setting a class variable value
      * @param entryDate string date and time for when the food/liquid intake
-     * @version 1.0 initial release
      * @since 18-March-2021
      */
     public void setEntryDate(String entryDate) {
@@ -122,7 +108,6 @@ public class FoodEntry {
     /**
      * Method for setting a class variable value
      * @param comments string for further information on the food/liquid intake
-     * @version 1.0 initial release
      * @since 18-March-2021
      */
     public void setComments(String comments) {
@@ -131,7 +116,6 @@ public class FoodEntry {
     /**
      * Method for setting a class variable value
      * @param foodType string whether the intake is solid (food) or liquid
-     * @version 1.0 initial release
      * @since 18-March-2021
      */
     public void setFoodType(String foodType) {
@@ -141,7 +125,6 @@ public class FoodEntry {
     /**
      * Method for setting a class variable value
      * @param recID integer whether the intake is solid (food) or liquid
-     * @version 1.0 initial release
      * @since 26-March-2021
      */
     public void setRecordID(Integer recID) {

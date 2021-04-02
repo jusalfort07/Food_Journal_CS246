@@ -1,17 +1,12 @@
 package com.example.foodjournal;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.gson.Gson;
 
 /**
  * Class that starts the execution of the program.
@@ -20,15 +15,13 @@ import com.google.gson.Gson;
  */
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = "MainActivity";
-    Button btnStart, btnView, btnSettings;
+    Button btnStart, btnView, btnSettings, btnCredit;
     View appBackground;
 
 
     /**
      * Initialize the activity.
      * @author java-champs
-     * @param savedInstanceState
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         btnStart = findViewById(R.id.btn_start);
         btnView = findViewById(R.id.btn_view);
         btnSettings = findViewById(R.id.btn_settings);
+        btnCredit = findViewById(R.id.btn_credit);
 
         //When click the start button, call a new activity to type a food entry
         btnStart.setOnClickListener(new View.OnClickListener() {
@@ -67,7 +61,16 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, UserSettingsActivity.class));
             }
         });
+
+        //When click the credits button, call a new activity to show the credits
+        btnCredit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, CreditActivity.class));
+            }
+        });
     }
+
 }
 
 

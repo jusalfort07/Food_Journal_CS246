@@ -22,28 +22,23 @@
     <TextView
         android:id="@+id/txt_EntryTypeLbl"
         android:text="@string/type"
-        android:textSize="18sp"
+        android:textSize="20sp"
         android:textStyle="italic"
         android:textColor="@color/white"
-
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.488"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-    </TextView>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <RadioGroup
         android:id="@+id/idRadioGroup"
-        android:layout_width="193dp"
-        android:layout_height="43dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_EntryTypeLbl">
 
@@ -51,21 +46,21 @@
             android:id="@+id/idSolid"
             android:padding="5dp"
             android:text="@string/solid"
+            android:textSize="16sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:textColor="@color/white"
-            android:textColorLink="#2196F3"/>
+            android:textColor="@color/white" />
 
         <RadioButton
             android:id="@+id/idLiquid"
             android:padding="5dp"
             android:text="@string/liquid"
+            android:textSize="16sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:textColor="@color/white"
-            android:textColorLink="#2196F3" />
+            android:textColor="@color/white" />
     </RadioGroup>
 
     <EditText
@@ -76,12 +71,12 @@
         android:textColor="@color/white"
         android:inputType="text"
         android:autofillHints=""
-
-        android:layout_width="282dp"
-        android:layout_height="63dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/idRadioGroup" />
 
@@ -93,12 +88,12 @@
         android:textColor="@color/white"
         android:inputType="number"
         android:autofillHints=""
-
-        android:layout_width="282dp"
-        android:layout_height="63dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_Description" />
 
@@ -108,14 +103,14 @@
         android:hint="@string/date"
         android:textColorHint="@color/gray_hint"
         android:textColor="@color/white"
-        android:inputType="none"
         android:autofillHints=""
-
-        android:layout_width="282dp"
-        android:layout_height="63dp"
+        android:inputType="date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.526"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_Quantity" />
 
@@ -127,15 +122,14 @@
         android:textColor="@color/white"
         android:inputType="textMultiLine"
         android:autofillHints=""
-
-        android:layout_width="282dp"
-        android:layout_height="85dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_EntryDate"
-        app:layout_constraintBottom_toTopOf="@id/btn_save"/>
+        app:layout_constraintTop_toBottomOf="@+id/txt_EntryDate"/>
 
 
     <Button
@@ -143,39 +137,42 @@
         android:layout_width="100dp"
         android:layout_height="30dp"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="40dp"
+        app:layout_constraintVertical_bias=".90"
         android:background="@drawable/btn_ltblue"
         android:elevation="9dp"
         android:text="@string/save"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_Comments" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_Comments"
+        app:layout_constraintBottom_toTopOf="@id/txt_instruct2" />
 
     <Button
         android:id="@+id/btn_view"
         android:layout_width="100dp"
         android:layout_height="30dp"
-        android:layout_marginTop="40dp"
+        app:layout_constraintVertical_bias=".90"
         android:background="@drawable/btn_ltblue"
         android:elevation="9dp"
         android:text="@string/view"
         android:textColor="@color/white"
         app:layout_constraintEnd_toStartOf="@+id/btn_return2"
         app:layout_constraintStart_toEndOf="@+id/btn_save"
-        app:layout_constraintTop_toBottomOf="@+id/txt_Comments" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_Comments"
+        app:layout_constraintBottom_toTopOf="@id/txt_instruct2"/>
 
     <Button
         android:id="@+id/btn_return2"
         android:layout_width="120dp"
         android:layout_height="30dp"
-        android:layout_marginTop="40dp"
         android:layout_marginEnd="30dp"
         android:background="@drawable/btn_ltblue"
         android:elevation="9dp"
         android:text="@string/btn_back"
         android:textColor="@color/white"
+        app:layout_constraintVertical_bias=".90"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_Comments" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_Comments"
+        app:layout_constraintBottom_toTopOf="@id/txt_instruct2" />
 
     <TextView
         android:id="@+id/txt_instruct2"

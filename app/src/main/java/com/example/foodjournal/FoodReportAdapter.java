@@ -2,12 +2,11 @@ package com.example.foodjournal;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,9 +16,9 @@ import java.util.ArrayList;
 
 public class FoodReportAdapter extends ArrayAdapter<FoodEntry> {
 
-    private int layout;
-    private static final String TAG = "FoodReportAdapter";
-    ArrayList<FoodEntry> dataList = new ArrayList<FoodEntry>();
+    private final int layout;
+    private static final String TAG = "CS246 FoodReportAdapter";
+    ArrayList<FoodEntry> dataList;
     FoodReportAdapter adapter;
 
     public FoodReportAdapter(Context context, int resource, ArrayList<FoodEntry> data) {
@@ -27,13 +26,12 @@ public class FoodReportAdapter extends ArrayAdapter<FoodEntry> {
         dataList = data;
         layout = resource;
         this.adapter = this;
-//      Log.i(TAG, "MS - MyListAdapter object created.");
     }
 
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder mainViewHolder = null;
+        ViewHolder mainViewHolder;
         FoodEntry fids = dataList.get(position);
 
         if (convertView == null) {
@@ -52,33 +50,33 @@ public class FoodReportAdapter extends ArrayAdapter<FoodEntry> {
         mainViewHolder = (ViewHolder) convertView.getTag();
 //      Log.i(TAG, "MS - convertView.getTag Success");
 
-        mainViewHolder.fEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent foodEntryIntent = new Intent(getContext(), FoodEntryActivity.class);
-                foodEntryIntent.putExtra("currentID", fids.getRecordID());
-                foodEntryIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                getContext().startActivity(foodEntryIntent);
-            }
+        mainViewHolder.fEdit.setOnClickListener(v -> {
+            Log.d(TAG, "Editing record...");
+            Intent foodEntryIntent = new Intent(getContext(), FoodEntryActivity.class);
+            foodEntryIntent.putExtra("currentID", fids.getRecordID());
+            foodEntryIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            getContext().startActivity(foodEntryIntent);
         });
 
-        mainViewHolder.fDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                    DatabaseHelper db = new DatabaseHelper(getContext());
-                    db.deleteEntry(fids);
-                    dataList.remove(position);
-                    notifyDataSetChanged();
-                    Toast.makeText(getContext(),"Deleted Record ID: " + fids.getRecordID() +
-                            " | Date: " + fids.getEntryDate() +
-                            " | Desc: " + fids.getDescription() +
-                            " | Qty: " + fids.getQuantity(), Toast.LENGTH_LONG).show();
-            }
+        mainViewHolder.fDelete.setOnClickListener(v -> {
+                Log.d(TAG, "Deleting record...");
+                DatabaseHelper db = new DatabaseHelper(getContext());
+                db.deleteEntry(fids);
+                dataList.remove(position);
+                notifyDataSetChanged();
+                Toast.makeText(getContext(),"Deleted Record ID: " + fids.getRecordID() +
+                        " | Date: " + fids.getEntryDate() +
+                        " | Desc: " + fids.getDescription() +
+                        " | Qty: " + fids.getQuantity(), Toast.LENGTH_LONG).show();
         });
 
+        String combined_info;
+        // Version 1.0 beta
+        //combined_info = "TYPE: " + fids.getFoodType() + " | QTY: "+fids.getQuantity();
+        combined_info = "(Quantity: "+fids.getQuantity()+")";
         mainViewHolder.desc.setText(fids.getDescription());
         mainViewHolder.date.setText(fids.getEntryDate());
-        mainViewHolder.info.setText("TYPE: " + fids.getFoodType() + " | QTY: "+fids.getQuantity());
+        mainViewHolder.info.setText(combined_info);
 
         return convertView;
     }
@@ -89,8 +87,6 @@ public class FoodReportAdapter extends ArrayAdapter<FoodEntry> {
         TextView info;
         ImageButton fEdit;
         ImageButton fDelete;
-        Button fEdit1;
-        Button fDelete1;
     }
 }
 

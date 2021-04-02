@@ -1,8 +1,10 @@
 package com.example.foodjournal;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -10,7 +12,6 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,16 +22,18 @@ public class UserSettingsActivity extends AppCompatActivity {
     // Activity variables
     View appBackground4;
     EditText txtName, txtEmail;
-    CheckBox chkSendRpt, chkWeek, chkMonth;
+    CheckBox chkSendRpt;
     RadioButton optWeek, optMonth, selectedFrequency;
     RadioGroup grpFrequency;
     Button btnSave;
+    private static final String TAG = "CS246 UserSettingsAct";
 
     // Shared preferences
     SharedPreferences mPrefs;
     SharedPreferences.Editor prefsEditor;
 
 
+    @SuppressLint("CommitPrefEdits")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +50,7 @@ public class UserSettingsActivity extends AppCompatActivity {
         optWeek = (RadioButton) findViewById(R.id.weekly);
         optMonth = (RadioButton) findViewById(R.id.monthly);
         grpFrequency = (RadioGroup) findViewById(R.id.rptFrequency);
+        grpFrequency.check(R.id.weekly);
 
         // Upload user settings data if shared preferences is not null
         UserSettings myGetUserSettings = getUserSettings();
@@ -65,21 +69,22 @@ public class UserSettingsActivity extends AppCompatActivity {
 
         // Set save button
         btnSave = (Button) findViewById(R.id.save);
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int selectedOption = grpFrequency.getCheckedRadioButtonId();
-                selectedFrequency = (RadioButton) findViewById(selectedOption);
+        btnSave.setOnClickListener((View.OnClickListener) v -> {
+            Log.d(TAG, "Saving user settings...");
+            int selectedOption = grpFrequency.getCheckedRadioButtonId();
+            selectedFrequency = (RadioButton) findViewById(selectedOption);
 
-                UserSettings us = new UserSettings();
-                us.setName(txtName.getText().toString());
-                us.setEmail(txtEmail.getText().toString());
-                us.setFrequency(selectedFrequency.getText().toString());
-                us.setSendReport(chkSendRpt.isChecked());
-                saveUserSettings(us);
-                System.out.println(selectedFrequency.getText().toString());
-                Toast.makeText(UserSettingsActivity.this, "Settings Saved!", Toast.LENGTH_SHORT).show();
-            }
+            UserSettings us = new UserSettings();
+            us.setName(txtName.getText().toString());
+            us.setEmail(txtEmail.getText().toString());
+            us.setFrequency(selectedFrequency.getText().toString());
+            us.setSendReport(chkSendRpt.isChecked());
+            saveUserSettings(us);
+            System.out.println(selectedFrequency.getText().toString());
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            Toast.makeText(UserSettingsActivity.this, "Settings Saved!", Toast.LENGTH_SHORT).show();
         });
 
         // Set background
@@ -88,12 +93,10 @@ public class UserSettingsActivity extends AppCompatActivity {
 
         // Set return button
         Button btnReturn4 = (Button) findViewById(R.id.btn_return4);
-        btnReturn4.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            }
+        btnReturn4.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
         });
     }
 
@@ -108,13 +111,13 @@ public class UserSettingsActivity extends AppCompatActivity {
     /**
      * Create a new object with the user setting values.
      * @author java-champs
-     * @version 1.0
      * @return UserSettings object.
      */
     public UserSettings getUserSettings(){
         Gson gson = new Gson();
         String json = mPrefs.getString("UserSettings", "");
-        UserSettings us = gson.fromJson(json, UserSettings.class);
+        UserSettings us;
+        us = gson.fromJson(json, UserSettings.class);
         return us;
     }
 
@@ -122,7 +125,6 @@ public class UserSettingsActivity extends AppCompatActivity {
     /**
      * Save the user settings values.
      * @author java-champs
-     * @version 1.0
      * @param us UserSettings object
      */
     public void saveUserSettings(UserSettings us){
