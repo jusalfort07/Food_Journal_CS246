@@ -70,6 +70,9 @@ public class FoodEntryActivity extends AppCompatActivity {
         btnSave = (Button) findViewById(R.id.btn_save);
         btnView = (Button) findViewById(R.id.btn_view);
         btnReturn2 = (Button) findViewById(R.id.btn_return2);
+        // Disabled by default to prevent saving of record when no user have put entries
+        btnSave.setEnabled(false);
+        btnSave.setBackground(getDrawable(R.drawable.btn_ltgray));
 
         foodDescTxt.addTextChangedListener(formTextWatcher);
         foodQtyTxt.addTextChangedListener(formTextWatcher);
@@ -277,9 +280,10 @@ public class FoodEntryActivity extends AppCompatActivity {
 
             if(view instanceof ViewGroup && (((ViewGroup)view).getChildCount() > 0))
                 clearForm((ViewGroup)view);
-
-            foodType.clearCheck();
         }
+        foodType.clearCheck();
+        btnSave.setEnabled(false);
+        btnSave.setBackground(getDrawable(R.drawable.btn_ltgray));
     }
 
 
@@ -300,6 +304,7 @@ public class FoodEntryActivity extends AppCompatActivity {
             String dateInput = dtIntakeTxt.getText().toString().trim();
 
             btnSave.setEnabled(!descInput.isEmpty() && !qtyInput.isEmpty() && !dateInput.isEmpty());
+            btnSave.setBackground(getDrawable(R.drawable.btn_ltblue));
         }
         @Override
         public void afterTextChanged(Editable s) {

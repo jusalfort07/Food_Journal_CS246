@@ -134,7 +134,7 @@
 
     <Button
         android:id="@+id/btn_save"
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginStart="30dp"
         app:layout_constraintVertical_bias=".90"
@@ -148,7 +148,7 @@
 
     <Button
         android:id="@+id/btn_view"
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="30dp"
         app:layout_constraintVertical_bias=".90"
         android:background="@drawable/btn_ltblue"
@@ -162,7 +162,9 @@
 
     <Button
         android:id="@+id/btn_return2"
-        android:layout_width="120dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginEnd="30dp"
         android:background="@drawable/btn_ltblue"
