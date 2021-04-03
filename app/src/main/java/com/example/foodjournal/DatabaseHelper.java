@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
 import java.util.ArrayList;
 
 /**
@@ -158,7 +160,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         ArrayList<FoodEntry> returnList = new ArrayList<>();
 
-        String queryString = String.format("SELECT * FROM %s", TABLE_NAME);
+        String queryString = String.format("SELECT * FROM %s ORDER BY DATE_INTAKE DESC", TABLE_NAME);
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(queryString, null);
 
@@ -195,7 +197,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         ArrayList<FoodEntry> returnList = new ArrayList<>();
 
-        String queryString = String.format("SELECT * FROM %s WHERE %s BETWEEN '%s' AND '%s'", TABLE_NAME, COL5, dtFrom, dtTo);
+        String queryString = String.format("SELECT * FROM %s WHERE %s BETWEEN '%s 00:00:00' AND '%s 23:59:59' ORDER BY DATE_INTAKE DESC", TABLE_NAME, COL5, dtFrom, dtTo);
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(queryString, null);
 
