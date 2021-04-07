@@ -141,7 +141,7 @@
         android:background="@drawable/btn_ltblue"
         android:elevation="9dp"
         android:text="@string/save"
-        android:textColor="@color/white"
+        android:textColor="@color/gray_hint"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_Comments"
         app:layout_constraintBottom_toTopOf="@id/txt_instruct2" />

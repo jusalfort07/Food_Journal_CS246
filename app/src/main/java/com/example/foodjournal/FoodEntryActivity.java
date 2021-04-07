@@ -284,6 +284,7 @@ public class FoodEntryActivity extends AppCompatActivity {
         foodType.clearCheck();
         btnSave.setEnabled(false);
         btnSave.setBackground(getDrawable(R.drawable.btn_ltgray));
+        btnSave.setTextColor(getResources().getColor(R.color.gray_hint));
     }
 
 
@@ -304,7 +305,10 @@ public class FoodEntryActivity extends AppCompatActivity {
             String dateInput = dtIntakeTxt.getText().toString().trim();
 
             btnSave.setEnabled(!descInput.isEmpty() && !qtyInput.isEmpty() && !dateInput.isEmpty());
-            btnSave.setBackground(getDrawable(R.drawable.btn_ltblue));
+            if (!descInput.isEmpty() && !qtyInput.isEmpty() && !dateInput.isEmpty()) {
+                btnSave.setBackground(getDrawable(R.drawable.btn_ltblue));
+                btnSave.setTextColor(getResources().getColor(R.color.white));
+            }
         }
         @Override
         public void afterTextChanged(Editable s) {

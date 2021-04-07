@@ -80,7 +80,7 @@
             android:layout_marginEnd="5dp"
             android:background="@drawable/btn_ltgray"
             android:text="@string/btn_delete"
-            android:textColor="@color/gray_hint"
+            android:textColor="@color/sub_info"
             android:layout_toEndOf="@id/btn_filter"/>
     </RelativeLayout>
 
